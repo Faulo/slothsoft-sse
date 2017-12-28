@@ -1,5 +1,5 @@
 <?php
-namespace Slothsoft\CMS;
+namespace Slothsoft\Farah;
 
 use Slothsoft\SSE\UnisonServer;
 $sseName = $this->httpRequest->getInputValue('name');

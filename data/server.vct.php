@@ -1,5 +1,5 @@
 <?php
-namespace Slothsoft\CMS;
+namespace Slothsoft\Farah;
 
 use Slothsoft\SSE\VCTServer;
 $sseName = $this->httpRequest->getInputValue('name');
