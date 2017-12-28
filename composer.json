@@ -1,0 +1,27 @@
+{
+    "name": "slothsoft/sse",
+    "description": "",
+    "keywords": [],
+    "license": "WTFPL",
+    "authors": [
+        {
+            "name": "Daniel Schulz",
+            "email": "info.slothsoft@gmail.com"
+        }
+    ],
+    "type": "library",
+    "require": {
+		"slothsoft/core" : "*",
+		"slothsoft/sse" : "*",
+		"slothsoft/dbms" : "*",
+		
+		"php": ">=7.0"
+    },
+	"require-dev": {
+    },
+	"autoload": {
+        "psr-4": {
+            "Slothsoft\\SSE\\": "php/"
+        }
+    }
+}

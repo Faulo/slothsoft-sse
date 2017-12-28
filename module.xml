@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<struc name="script">
+		<struc name="/core/DOM" />
+		<script name="SSE" />
+		<script name="SSE.Client" />
+	</struc>
+</module>
