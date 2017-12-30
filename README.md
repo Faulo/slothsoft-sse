@@ -1,4 +1,4 @@
 Server Sent Events
 ==================
 
-A Farah module.
+A Farah module for server-sent events.
