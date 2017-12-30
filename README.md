@@ -1,4 +1,4 @@
-Files and Resources and Hypertext
-=================================
+Server Sent Events
+==================
 
 A Farah module.
