@@ -1,16 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module xmlns="http://schema.slothsoft.net/farah/module">
-	<assets>
-		<resource-directory name="data" path="data" type="application/x-php"/>
-		<resource-directory name="css" path="stylesheet" type="text/css"/>
-		<resource-directory name="js" path="script" type="application/javascript"/>
-		<resource-directory name="xsl" path="template" type="application/xslt+xml"/>
-		
-		
-		<fragment name="script">
-			<include-fragment ref="//core/DOM" />
-			<use-script ref="js/SSE" />
-			<use-script ref="js/SSE.Client" />
-		</fragment>
-	</assets>
+<?xml version="1.0"?>
+<module xmlns="http://schema.slothsoft.net/farah/module" xmlns:sfm="http://schema.slothsoft.net/farah/module">
+  <!--
+Farah Module Manifest
+
+Module: sse
+Vendor: slothsoft
+Farah ID: farah://slothsoft@sse
+Composer ID: slothsoft/sse
+
+Homepage: http://farah.slothsoft.net/modules/sse
+Packagist: https://packagist.org/packages/slothsoft/sse
+GitHub: https://github.com/Faulo/slothsoft-sse
+
+Llo
+-->
+  <default-configuration/>
+  <assets>
+    <fragment name="script">
+      <include-fragment ref="//core/DOM"/>
+      <use-script ref="js/SSE"/>
+      <use-script ref="js/SSE.Client"/>
+    </fragment>
+  </assets>
 </module>
