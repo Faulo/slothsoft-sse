@@ -16,7 +16,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"Slothsoft\\SSE\\" : "php/"
+			"Slothsoft\\SSE\\": "src/Slothsoft/SSE/"
 		}
 	}
 }

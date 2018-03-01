@@ -24,7 +24,7 @@ Llo
     <resource-directory name="pages" path="pages" type="application/xml"/>
     <directory name="static"/>
     <fragment name="script">
-      <include-fragment ref="//core/DOM"/>
+      <import ref="//core/DOM"/>
       <use-script ref="js/SSE"/>
       <use-script ref="js/SSE.Client"/>
     </fragment>
