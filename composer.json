@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Slothsoft\\SSE\\": "src\/Slothsoft\/SSE\/"
+            "Slothsoft\\SSE\\": "src\/"
         }
     },
     "require-dev": {
