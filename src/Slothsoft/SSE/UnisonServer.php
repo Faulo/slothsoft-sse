@@ -62,7 +62,7 @@ class UnisonServer extends Server
     {
         $status = json_decode($event['data'], true);
         if ($status['playing']) {
-            $status['progress'] += microtime(true) - $event['create-time'] + 100 * TIME_MILLISECOND;
+            $status['progress'] += microtime(true) - $event['create-time'] + 100 * Seconds::MILLISECOND;
             $event['data'] = json_encode($status);
         }
         // my_dump($status);

@@ -8,7 +8,7 @@
  ***********************************************************************/
 namespace Slothsoft\SSE;
 
-use Slothsoft\Farah\HTTPStream;
+use Slothsoft\Core\IO\HTTPStream;
 
 class Stream extends HTTPStream
 {
@@ -37,9 +37,9 @@ class Stream extends HTTPStream
         // $this->headerList['connection'] = 'close';
         $this->hasStarted = false;
         $this->eventStack = [];
-        $this->sleepDuration = 100 * TIME_MILLISECOND;
+        $this->sleepDuration = 100 * Seconds::MILLISECOND;
         $this->heartbeatContent = ":\n";
-        $this->heartbeatInterval = 10 * TIME_SECOND;
+        $this->heartbeatInterval = 10 * Seconds::SECOND;
     }
 
     protected function parseStatus()

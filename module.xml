@@ -25,8 +25,8 @@ Llo
     <directory name="static"/>
     <fragment name="script">
       <import ref="//core/DOM"/>
-      <use-script ref="js/SSE"/>
-      <use-script ref="js/SSE.Client"/>
+      <link-script ref="js/SSE"/>
+      <link-script ref="js/SSE.Client"/>
     </fragment>
   </assets>
 </module>
