@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /***********************************************************************
  * \SSE\UnisonServer v1.00 29.05.2014 © Daniel Schulz
  * 

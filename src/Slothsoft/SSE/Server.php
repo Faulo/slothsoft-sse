@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /***********************************************************************
  * ServerSentEvents v1.00 07.05.2014 © Daniel Schulz
  * 
