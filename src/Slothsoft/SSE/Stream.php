@@ -8,6 +8,7 @@
  ***********************************************************************/
 namespace Slothsoft\SSE;
 
+use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\Core\IO\HTTPStream;
 
 class Stream extends HTTPStream

@@ -8,6 +8,8 @@
  ***********************************************************************/
 namespace Slothsoft\SSE;
 
+use Slothsoft\Core\Calendar\Seconds;
+
 class UnisonServer extends Server
 {
 
