@@ -16,7 +16,7 @@
     },
     "autoload": {
         "files": [
-            "src\/registerModule.php"
+            "C:\\Webserver\\workspace\\slothsoft-sse\\src\\registerModule.php"
         ],
         "psr-0": {
             "Slothsoft\\SSE\\": "src\/"
