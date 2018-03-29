@@ -13,7 +13,7 @@ declare(strict_types = 1);
  ***********************************************************************/
 namespace Slothsoft\SSE;
 
-use Slothsoft\DBMS\Manager;
+use Slothsoft\Core\DBMS\Manager;
 
 class Server
 {
