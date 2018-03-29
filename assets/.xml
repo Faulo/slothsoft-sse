@@ -1,15 +1,12 @@
 <?xml version="1.0"?>
 <assets xmlns="http://schema.slothsoft.net/farah/module">
-    <resource-directory name="data" path="data" type="application/x-php"/>
-    <resource-directory name="css" path="stylesheet" type="text/css"/>
-    <resource-directory name="js" path="script" type="application/javascript"/>
-    <resource-directory name="xsl" path="template" type="application/xslt+xml"/>
-    <resource-directory name="dictionary" path="dictionary" type="application/xml"/>
-    <resource-directory name="pages" path="pages" type="application/xml"/>
-    <directory name="static"/>
-    <fragment name="script">
-      <import ref="//core/DOM"/>
-      <link-script ref="js/SSE"/>
-      <link-script ref="js/SSE.Client"/>
+    <resource-directory name="js" type="application/javascript"/>
+    
+    <fragment name="imports">
+	    <fragment name="client">
+	      <import ref="//slothsoft@core/imports/DOM"/>
+	      <link-script ref="js/SSE"/>
+	      <link-script ref="js/SSE.Client"/>
+	    </fragment>
     </fragment>
   </assets>
