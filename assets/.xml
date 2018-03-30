@@ -2,9 +2,9 @@
 <assets xmlns="http://schema.slothsoft.net/farah/module">
     <resource-directory name="js" type="application/javascript"/>
     
-    <fragment name="imports">
+    <fragment name="api">
 	    <fragment name="client">
-	      <import ref="//slothsoft@core/imports/DOM"/>
+	      <import ref="//slothsoft@core/api/DOM"/>
 	      <link-script ref="js/SSE"/>
 	      <link-script ref="js/SSE.Client"/>
 	    </fragment>
