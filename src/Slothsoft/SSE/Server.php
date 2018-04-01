@@ -1,16 +1,18 @@
 <?php
 declare(strict_types = 1);
-/***********************************************************************
+/**
+ * *********************************************************************
  * ServerSentEvents v1.00 07.05.2014 © Daniel Schulz
- * 
- * 	Changelog:
- *		v1.00 07.05.2014
- *			public function __construct($serverName)
- *			public function init($user = null, $lastId = null)
- *			public function dispatchEvent($type, $data)
- *			public function sendEvent($type, $data, $user = null, $id = null)
- *			public function run()
- ***********************************************************************/
+ *
+ * Changelog:
+ * v1.00 07.05.2014
+ * public function __construct($serverName)
+ * public function init($user = null, $lastId = null)
+ * public function dispatchEvent($type, $data)
+ * public function sendEvent($type, $data, $user = null, $id = null)
+ * public function run()
+ * *********************************************************************
+ */
 namespace Slothsoft\SSE;
 
 use Slothsoft\Core\DBMS\Manager;

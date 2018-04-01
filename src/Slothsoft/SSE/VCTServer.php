@@ -1,12 +1,14 @@
 <?php
 declare(strict_types = 1);
-/***********************************************************************
+/**
+ * *********************************************************************
  * \SSE\VCTServer v1.00 29.05.2014 © Daniel Schulz
- * 
- * 	Changelog:
- *		v1.00 29.05.2014
- *			public function __construct($serverName)
- ***********************************************************************/
+ *
+ * Changelog:
+ * v1.00 29.05.2014
+ * public function __construct($serverName)
+ * *********************************************************************
+ */
 namespace Slothsoft\SSE;
 
 use Slothsoft\Core\Game\Name;
