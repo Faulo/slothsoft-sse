@@ -16,15 +16,16 @@ declare(strict_types = 1);
 namespace Slothsoft\SSE;
 
 use Slothsoft\Core\DBMS\Manager;
+use Exception;
 
 class Server
 {
 
-    protected $dbName;
+    private $dbName;
 
-    protected $tableName;
+    private $tableName;
 
-    protected $dbmsTable;
+    private $dbmsTable;
 
     public $lastId;
 
@@ -34,10 +35,6 @@ class Server
     {
         $this->dbName = $dbName;
         $this->tableName = $tableName;
-        $this->dbmsTable = Manager::getTable($this->dbName, $this->tableName);
-        if (! $this->dbmsTable->tableExists()) {
-            $this->install();
-        }
     }
 
     public function __destruct()
@@ -47,7 +44,7 @@ class Server
         }
     }
 
-    protected function install()
+    private function install()
     {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
@@ -64,9 +61,20 @@ class Server
     public function init($lastId = null)
     {
         $this->lastId = (int) $lastId;
-        if (! $this->lastId) {
-            $res = $this->dbmsTable->select('id', null, 'ORDER BY id DESC LIMIT 1');
-            $this->lastId = (int) current($res);
+        
+        
+        try {
+            $this->dbmsTable = Manager::getTable($this->dbName, $this->tableName);
+            if (! $this->dbmsTable->tableExists()) {
+                $this->install();
+            }
+            if (! $this->lastId) {
+                $res = $this->dbmsTable->select('id', null, 'ORDER BY id DESC LIMIT 1');
+                $this->lastId = (int) current($res);
+            }
+        } catch(Exception $e) {
+            $this->dbmsTable = null;
+            throw $e;
         }
     }
 
@@ -88,14 +96,20 @@ class Server
 
     public function dispatchEvent($type, $data)
     {
+        if (!$this->dbmsTable) {
+            return false;
+        }
         return $this->dbmsTable->insert([
             'type' => $type,
             'data' => $data
         ]);
     }
 
-    public function fetchNewEvents($lastId)
+    public function fetchNewEvents($lastId) : array
     {
+        if (!$this->dbmsTable) {
+            return [];
+        }
         $ret = $this->dbmsTable->select(true, sprintf('id > %d', $lastId), 'ORDER BY id');
         foreach ($ret as &$arr) {
             $arr['id'] = (int) $arr['id'];
@@ -105,6 +119,9 @@ class Server
 
     public function fetchLastEvent()
     {
+        if (!$this->dbmsTable) {
+            return null;
+        }
         $ret = $this->dbmsTable->select(true, null, 'ORDER BY id DESC LIMIT 1');
         foreach ($ret as &$arr) {
             $arr['id'] = (int) $arr['id'];

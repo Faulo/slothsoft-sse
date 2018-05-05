@@ -48,7 +48,6 @@ class Stream extends HTTPStream
 
     protected function parseStatus()
     {
-        static $runCount = 0;
         if ($this->ownerServer->isRunning) {
             if ($eventList = $this->ownerServer->fetchNewEvents($this->ownerServer->lastId)) {
                 foreach ($eventList as $event) {
