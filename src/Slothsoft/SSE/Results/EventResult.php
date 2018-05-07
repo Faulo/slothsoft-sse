@@ -27,7 +27,7 @@ class EventResult extends ResultBase
             new GeneratorStream($this->generator),
             (int) (100 * Seconds::MILLISECOND * Seconds::USLEEP_FACTOR),
             [
-                'interval' => (int) (1 * Seconds::SECOND * Seconds::USLEEP_FACTOR),
+                'interval' => (int) (10 * Seconds::SECOND * Seconds::USLEEP_FACTOR),
                 'content' => ":\n",
             ]
         );
@@ -52,6 +52,9 @@ class EventResult extends ResultBase
     {
         return 0;
     }
-
+    
+    public function lookupIsBufferable() : bool {
+        return false;
+    }
 }
 
