@@ -7,39 +7,44 @@ use Generator;
 
 class EventGenerator implements ChunkWriterInterface
 {
+
     const STREAM_EOL = "\n";
-    
+
     const STREAM_FIELD_BLANK = ":%s\n";
-    
+
     const STREAM_FIELD_ID = "id:%d\n";
-    
+
     const STREAM_FIELD_TYPE = "event:%s\n";
-    
+
     const STREAM_FIELD_DATA = "data:%s\n";
-    
+
     const STREAM_FIELD_RETRY = "retry:%d\n";
-    
+
     private $server;
+
     public function __construct(Server $server)
     {
         $this->server = $server;
     }
-    
-    public function toChunks() : Generator
+
+    public function toChunks(): Generator
     {
         $this->server->startRunning();
-        yield $this->formatEvent(['type' => 'start', 'data' => '']);
-        while (!connection_aborted()) {
+        yield $this->formatEvent([
+            'type' => 'start',
+            'data' => ''
+        ]);
+        while (! connection_aborted()) {
             $eventList = $this->server->fetchNewEvents($this->server->lastId);
             foreach ($eventList as $event) {
                 $this->server->lastId = $event['id'];
                 yield $this->formatEvent($event);
             }
-            yield ''; //yield an empty string to indicate we need to sleep before proceeding
+            yield ''; // yield an empty string to indicate we need to sleep before proceeding
         }
     }
-    
-    private function formatEvent(array $event) : string
+
+    private function formatEvent(array $event): string
     {
         $ret = '';
         $sendEOL = false;
@@ -67,8 +72,8 @@ class EventGenerator implements ChunkWriterInterface
         }
         return $ret;
     }
-    
-    private function formatEventLine(string $pattern, string $data = null) : string
+
+    private function formatEventLine(string $pattern, string $data = null): string
     {
         if (strpos($data, self::STREAM_EOL) === false) {
             return sprintf($pattern, $data);
@@ -81,6 +86,5 @@ class EventGenerator implements ChunkWriterInterface
             return $ret;
         }
     }
-
 }
 

@@ -8,7 +8,9 @@ use Slothsoft\Farah\Module\Module;
 
 class AssetsManifestTest extends AbstractXmlManifestTest
 {
-    protected static function loadManifest() : ManifestInterface {
+
+    protected static function loadManifest(): ManifestInterface
+    {
         return new XmlManifest(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . Module::FILE_MANIFEST);
     }
 }

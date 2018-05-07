@@ -7,10 +7,9 @@ use Slothsoft\Farah\Module\FarahUrl\FarahUrlAuthority;
 
 class AssetsModuleTest extends AbstractModuleTest
 {
-    protected static function loadModule() : Module {
-        return new Module(
-            FarahUrlAuthority::createFromVendorAndModule('slothsoft', 'sse'),
-            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'assets'
-        );
+
+    protected static function loadModule(): Module
+    {
+        return new Module(FarahUrlAuthority::createFromVendorAndModule('slothsoft', 'sse'), dirname(__DIR__) . DIRECTORY_SEPARATOR . 'assets');
     }
 }

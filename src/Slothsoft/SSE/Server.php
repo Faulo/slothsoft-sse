@@ -62,7 +62,6 @@ class Server
     {
         $this->lastId = (int) $lastId;
         
-        
         try {
             $this->dbmsTable = Manager::getTable($this->dbName, $this->tableName);
             if (! $this->dbmsTable->tableExists()) {
@@ -72,7 +71,7 @@ class Server
                 $res = $this->dbmsTable->select('id', null, 'ORDER BY id DESC LIMIT 1');
                 $this->lastId = (int) current($res);
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->dbmsTable = null;
             throw $e;
         }
@@ -96,7 +95,7 @@ class Server
 
     public function dispatchEvent($type, $data)
     {
-        if (!$this->dbmsTable) {
+        if (! $this->dbmsTable) {
             return false;
         }
         return $this->dbmsTable->insert([
@@ -105,9 +104,9 @@ class Server
         ]);
     }
 
-    public function fetchNewEvents($lastId) : array
+    public function fetchNewEvents($lastId): array
     {
-        if (!$this->dbmsTable) {
+        if (! $this->dbmsTable) {
             return [];
         }
         $ret = $this->dbmsTable->select(true, sprintf('id > %d', $lastId), 'ORDER BY id');
@@ -119,7 +118,7 @@ class Server
 
     public function fetchLastEvent()
     {
-        if (!$this->dbmsTable) {
+        if (! $this->dbmsTable) {
             return null;
         }
         $ret = $this->dbmsTable->select(true, null, 'ORDER BY id DESC LIMIT 1');

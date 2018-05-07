@@ -11,29 +11,28 @@ use Slothsoft\SSE\EventGenerator;
 
 class EventResult extends ResultBase
 {
+
     private $generator;
-    public function __construct(EventGenerator $generator) {
+
+    public function __construct(EventGenerator $generator)
+    {
         $this->generator = $generator;
     }
-    
-    public function lookupHash() : string
+
+    public function lookupHash(): string
     {
         return '';
     }
 
-    public function lookupStream() : StreamInterface
+    public function lookupStream(): StreamInterface
     {
-        return new WaitingStream(
-            new GeneratorStream($this->generator),
-            (int) (100 * Seconds::MILLISECOND * Seconds::USLEEP_FACTOR),
-            [
-                'interval' => (int) (10 * Seconds::SECOND * Seconds::USLEEP_FACTOR),
-                'content' => ":\n",
-            ]
-        );
+        return new WaitingStream(new GeneratorStream($this->generator), (int) (100 * Seconds::MILLISECOND * Seconds::USLEEP_FACTOR), [
+            'interval' => (int) (10 * Seconds::SECOND * Seconds::USLEEP_FACTOR),
+            'content' => ":\n"
+        ]);
     }
 
-    public function lookupMimeType() : string
+    public function lookupMimeType(): string
     {
         return 'text/event-stream';
     }
@@ -52,8 +51,9 @@ class EventResult extends ResultBase
     {
         return 0;
     }
-    
-    public function lookupIsBufferable() : bool {
+
+    public function lookupIsBufferable(): bool
+    {
         return false;
     }
 }
