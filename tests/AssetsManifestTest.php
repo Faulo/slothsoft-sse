@@ -1,16 +1,13 @@
 <?php
 declare(strict_types = 1);
 
-use Slothsoft\Farah\ModuleTests\AbstractXmlManifestTest;
-use Slothsoft\Farah\Module\Manifest\ManifestInterface;
-use Slothsoft\Farah\Module\Manifest\XmlManifest;
-use Slothsoft\Farah\Module\Module;
+use Slothsoft\Farah\ModuleTests\AbstractXmlTreeLoaderTest;
 
-class AssetsManifestTest extends AbstractXmlManifestTest
+class AssetsManifestTest extends AbstractXmlTreeLoaderTest
 {
-
-    protected static function loadManifest(): ManifestInterface
+    protected static function getManifestDirectory(): string
     {
-        return new XmlManifest(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . Module::FILE_MANIFEST);
+        return dirname(__DIR__) . DIRECTORY_SEPARATOR . 'assets';
     }
+    
 }
