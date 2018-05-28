@@ -1,0 +1,75 @@
+<?php
+declare(strict_types = 1);
+/**
+ * *********************************************************************
+ * \SSE\UnisonServer v1.00 29.05.2014 © Daniel Schulz
+ *
+ * Changelog:
+ * v1.00 29.05.2014
+ * public function __construct($serverName)
+ * *********************************************************************
+ */
+namespace Slothsoft\SSE;
+
+use Slothsoft\Core\Calendar\Seconds;
+
+class UnisonServer extends Server
+{
+
+    public function __construct($serverName)
+    {
+        parent::__construct(sprintf('unison: %s', $serverName), 'sse');
+    }
+
+    protected function install()
+    {
+        $sqlCols = [
+            'id' => 'int NOT NULL AUTO_INCREMENT',
+            'type' => 'varchar(32) NULL',
+            'data' => 'text NULL',
+            'create-time' => 'double NOT NULL DEFAULT "0"'
+        ];
+        $sqlKeys = [
+            'id',
+            'type'
+        ];
+        $this->dbmsTable->createTable($sqlCols, $sqlKeys);
+    }
+
+    public function dispatchEvent($type, $data)
+    {
+        return $this->dbmsTable->insert([
+            'type' => $type,
+            'data' => $data,
+            'create-time' => microtime(true)
+        ]);
+    }
+
+    public function fetchNewEvents($lastId)
+    {
+        if ($ret = parent::fetchNewEvents($lastId)) {
+            foreach ($ret as &$arr) {
+                $this->_parseEvent($arr);
+            }
+        }
+        return $ret;
+    }
+
+    public function fetchLastEvent()
+    {
+        if ($ret = parent::fetchLastEvent()) {
+            $this->_parseEvent($ret);
+        }
+        return $ret;
+    }
+
+    public function _parseEvent(array &$event)
+    {
+        $status = json_decode($event['data'], true);
+        if ($status['playing']) {
+            $status['progress'] += microtime(true) - $event['create-time'] + 100 * Seconds::MILLISECOND;
+            $event['data'] = json_encode($status);
+        }
+        // my_dump($status);
+    }
+}
