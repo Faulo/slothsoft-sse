@@ -7,9 +7,9 @@ SSE.Client = function(baseURI, name, logCallback, lastId) {
 		lastId = "";
 	}
 	this.lastId = lastId;
-	this.pullURI = baseURI + "?mode=pull&name=" + this.name + "&lastId=" + this.lastId;
-	this.pushURI = baseURI + "?mode=push&name=" + this.name;
-	this.lastURI = baseURI + "?mode=last&name=" + this.name;
+	this.pullURI = baseURI + "/pull?name=" + this.name + "&lastId=" + this.lastId;
+	this.pushURI = baseURI + "/push?name=" + this.name;
+	this.lastURI = baseURI + "/last?name=" + this.name;
 	this.sseClient = this;
 	
 	this.loggedEvents = {};

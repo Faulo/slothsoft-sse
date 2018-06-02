@@ -68,7 +68,7 @@ class Server
                 $this->install();
             }
             if (! $this->lastId) {
-                $res = $this->dbmsTable->select('id', null, 'ORDER BY id DESC LIMIT 1');
+                $res = $this->dbmsTable->select('id', '', 'ORDER BY id DESC LIMIT 1');
                 $this->lastId = (int) current($res);
             }
         } catch (Exception $e) {
@@ -104,16 +104,16 @@ class Server
         ]);
     }
 
-    public function fetchNewEvents($lastId): array
+    public function fetchNewEvents($lastId): iterable
     {
         if (! $this->dbmsTable) {
             return [];
         }
-        $ret = $this->dbmsTable->select(true, sprintf('id > %d', $lastId), 'ORDER BY id');
-        foreach ($ret as &$arr) {
-            $arr['id'] = (int) $arr['id'];
+        $events = $this->dbmsTable->select(true, sprintf('id > %d', $lastId), 'ORDER BY id');
+        foreach ($events as $event) {
+            $event['id'] = (int) $event['id'];
+            yield $arr;
         }
-        return $ret;
     }
 
     public function fetchLastEvent()
