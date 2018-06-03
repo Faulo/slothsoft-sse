@@ -35,8 +35,8 @@ class EventGenerator implements ChunkWriterInterface
             'data' => ''
         ]);
         while (! connection_aborted()) {
-            $eventList = $this->server->fetchNewEvents($this->server->lastId);
-            foreach ($eventList as $event) {
+            $events = $this->server->fetchNewEvents($this->server->lastId);
+            foreach ($events as $event) {
                 $this->server->lastId = $event['id'];
                 yield $this->formatEvent($event);
             }
