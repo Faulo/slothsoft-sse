@@ -25,9 +25,9 @@ class EventStreamBuilder implements StreamBuilderStrategyInterface
         return 'events.txt';
     }
 
-    public function buildStreamChangeTime(ResultInterface $context): int
+    public function buildStreamFileStat(ResultInterface $context): array
     {
-        return 0;
+        return [];
     }
 
     public function buildStreamIsBufferable(ResultInterface $context): bool

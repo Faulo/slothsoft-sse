@@ -31,12 +31,12 @@
 <text text-anchor="middle" x="813.941" y="-407.2" font-family="Courier,monospace" font-size="11.00">EventStreamBuilder</text>
 </g>
 <!-- \\Slothsoft\\Farah\\Module\\Result\\StreamBuilderStrategy\\StreamBuilderStrategyInterface -->
-<g id="node9" class="node"><title>\\Slothsoft\\Farah\\Module\\Result\\StreamBuilderStrategy\\StreamBuilderStrategyInterface</title>
+<g id="node8" class="node"><title>\\Slothsoft\\Farah\\Module\\Result\\StreamBuilderStrategy\\StreamBuilderStrategyInterface</title>
 <ellipse fill="none" stroke="black" cx="334.72" cy="-180" rx="323.043" ry="18"/>
 <text text-anchor="middle" x="334.72" y="-176.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Farah\Module\Result\StreamBuilderStrategy\StreamBuilderStrategyInterface</text>
 </g>
 <!-- \\Slothsoft\\SSE\\Results\\EventStreamBuilder&#45;&gt;\\Slothsoft\\Farah\\Module\\Result\\StreamBuilderStrategy\\StreamBuilderStrategyInterface -->
-<g id="edge2" class="edge"><title>\\Slothsoft\\SSE\\Results\\EventStreamBuilder&#45;&gt;\\Slothsoft\\Farah\\Module\\Result\\StreamBuilderStrategy\\StreamBuilderStrategyInterface</title>
+<g id="edge1" class="edge"><title>\\Slothsoft\\SSE\\Results\\EventStreamBuilder&#45;&gt;\\Slothsoft\\Farah\\Module\\Result\\StreamBuilderStrategy\\StreamBuilderStrategyInterface</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M744.969,-391.806C740.812,-389.247 736.914,-386.328 733.441,-383 676.65,-328.579 731.719,-266.044 669.441,-218 656.441,-207.971 642.264,-199.689 627.325,-192.891"/>
 <polygon fill="none" stroke="black" points="628.499,-189.585 617.93,-188.847 625.731,-196.015 628.499,-189.585"/>
 </g>
@@ -46,54 +46,54 @@
 <text text-anchor="middle" x="813.941" y="-353.2" font-family="Courier,monospace" font-size="11.00">ServerResultBuilder</text>
 </g>
 <!-- \\Slothsoft\\Farah\\Module\\Executable\\ResultBuilderStrategy\\ResultBuilderStrategyInterface -->
-<g id="node10" class="node"><title>\\Slothsoft\\Farah\\Module\\Executable\\ResultBuilderStrategy\\ResultBuilderStrategyInterface</title>
+<g id="node9" class="node"><title>\\Slothsoft\\Farah\\Module\\Executable\\ResultBuilderStrategy\\ResultBuilderStrategyInterface</title>
 <ellipse fill="none" stroke="black" cx="334.72" cy="-126" rx="334.941" ry="18"/>
 <text text-anchor="middle" x="334.72" y="-122.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ResultBuilderStrategyInterface</text>
 </g>
 <!-- \\Slothsoft\\SSE\\Results\\ServerResultBuilder&#45;&gt;\\Slothsoft\\Farah\\Module\\Executable\\ResultBuilderStrategy\\ResultBuilderStrategyInterface -->
-<g id="edge3" class="edge"><title>\\Slothsoft\\SSE\\Results\\ServerResultBuilder&#45;&gt;\\Slothsoft\\Farah\\Module\\Executable\\ResultBuilderStrategy\\ResultBuilderStrategyInterface</title>
+<g id="edge2" class="edge"><title>\\Slothsoft\\SSE\\Results\\ServerResultBuilder&#45;&gt;\\Slothsoft\\Farah\\Module\\Executable\\ResultBuilderStrategy\\ResultBuilderStrategyInterface</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M741.237,-340.083C738.467,-338.266 735.85,-336.246 733.441,-334 671.035,-275.811 737.065,-205.033 669.441,-153 603.553,-102.303 507.123,-99.8258 434.843,-107.513"/>
 <polygon fill="none" stroke="black" points="434.347,-104.047 424.809,-108.661 435.143,-111.001 434.347,-104.047"/>
 </g>
-<!-- \\Slothsoft\\SSE\\EventGenerator -->
-<g id="node3" class="node"><title>\\Slothsoft\\SSE\\EventGenerator</title>
-<polygon fill="none" stroke="black" points="869.441,-320 758.441,-320 758.441,-284 869.441,-284 869.441,-320"/>
-<text text-anchor="middle" x="813.941" y="-299.2" font-family="Courier,monospace" font-size="11.00">EventGenerator</text>
-</g>
-<!-- \\Slothsoft\\Core\\IO\\Writable\\ChunkWriterInterface -->
-<g id="node8" class="node"><title>\\Slothsoft\\Core\\IO\\Writable\\ChunkWriterInterface</title>
-<ellipse fill="none" stroke="black" cx="334.72" cy="-72" rx="193.066" ry="18"/>
-<text text-anchor="middle" x="334.72" y="-68.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Core\IO\Writable\ChunkWriterInterface</text>
-</g>
-<!-- \\Slothsoft\\SSE\\EventGenerator&#45;&gt;\\Slothsoft\\Core\\IO\\Writable\\ChunkWriterInterface -->
-<g id="edge1" class="edge"><title>\\Slothsoft\\SSE\\EventGenerator&#45;&gt;\\Slothsoft\\Core\\IO\\Writable\\ChunkWriterInterface</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M758.339,-290.751C749.191,-286.937 740.42,-281.832 733.441,-275 673.96,-216.777 735.632,-149.463 669.441,-99 601.12,-46.9139 500.453,-45.9707 427.561,-54.4783"/>
-<polygon fill="none" stroke="black" points="426.956,-51.0265 417.466,-55.7371 427.822,-57.9727 426.956,-51.0265"/>
-</g>
-<!-- \\Slothsoft\\SSE\\Server -->
-<g id="node4" class="node"><title>\\Slothsoft\\SSE\\Server</title>
-<polygon fill="none" stroke="black" points="363.22,-527 306.22,-527 306.22,-491 363.22,-491 363.22,-527"/>
-<text text-anchor="middle" x="334.72" y="-506.2" font-family="Courier,monospace" font-size="11.00">Server</text>
-</g>
 <!-- \\Slothsoft\\SSE\\Stream -->
-<g id="node5" class="node"><title>\\Slothsoft\\SSE\\Stream</title>
-<polygon fill="none" stroke="black" points="842.441,-266 785.441,-266 785.441,-230 842.441,-230 842.441,-266"/>
-<text text-anchor="middle" x="813.941" y="-245.2" font-family="Courier,monospace" font-size="11.00">Stream</text>
+<g id="node3" class="node"><title>\\Slothsoft\\SSE\\Stream</title>
+<polygon fill="none" stroke="black" points="842.441,-320 785.441,-320 785.441,-284 842.441,-284 842.441,-320"/>
+<text text-anchor="middle" x="813.941" y="-299.2" font-family="Courier,monospace" font-size="11.00">Stream</text>
 </g>
 <!-- \\Slothsoft\\Core\\IO\\HTTPStream -->
-<g id="node11" class="node"><title>\\Slothsoft\\Core\\IO\\HTTPStream</title>
-<ellipse fill="none" stroke="black" cx="334.72" cy="-18" rx="129.977" ry="18"/>
-<text text-anchor="middle" x="334.72" y="-14.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Core\IO\HTTPStream</text>
+<g id="node10" class="node"><title>\\Slothsoft\\Core\\IO\\HTTPStream</title>
+<ellipse fill="none" stroke="black" cx="334.72" cy="-72" rx="129.977" ry="18"/>
+<text text-anchor="middle" x="334.72" y="-68.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Core\IO\HTTPStream</text>
 </g>
 <!-- \\Slothsoft\\SSE\\Stream&#45;&gt;\\Slothsoft\\Core\\IO\\HTTPStream -->
-<g id="edge4" class="edge"><title>\\Slothsoft\\SSE\\Stream&#45;&gt;\\Slothsoft\\Core\\IO\\HTTPStream</title>
-<path fill="none" stroke="black" d="M806.352,-229.865C790.288,-188.603 744.806,-87.961 669.441,-45 599.409,-5.07986 507.32,-0.487232 437.621,-4.66194"/>
-<polygon fill="none" stroke="black" points="437.25,-1.17886 427.506,-5.33833 437.717,-8.16326 437.25,-1.17886"/>
+<g id="edge3" class="edge"><title>\\Slothsoft\\SSE\\Stream&#45;&gt;\\Slothsoft\\Core\\IO\\HTTPStream</title>
+<path fill="none" stroke="black" d="M785.113,-298.682C768.212,-295.319 747.295,-288.561 733.441,-275 673.96,-216.777 735.632,-149.463 669.441,-99 598.03,-44.5579 491.279,-45.99 417.845,-55.6869"/>
+<polygon fill="none" stroke="black" points="417.13,-52.2528 407.711,-57.1051 418.1,-59.1853 417.13,-52.2528"/>
+</g>
+<!-- \\Slothsoft\\SSE\\EventGenerator -->
+<g id="node4" class="node"><title>\\Slothsoft\\SSE\\EventGenerator</title>
+<polygon fill="none" stroke="black" points="869.441,-266 758.441,-266 758.441,-230 869.441,-230 869.441,-266"/>
+<text text-anchor="middle" x="813.941" y="-245.2" font-family="Courier,monospace" font-size="11.00">EventGenerator</text>
+</g>
+<!-- \\Slothsoft\\Core\\IO\\Writable\\ChunkWriterInterface -->
+<g id="node11" class="node"><title>\\Slothsoft\\Core\\IO\\Writable\\ChunkWriterInterface</title>
+<ellipse fill="none" stroke="black" cx="334.72" cy="-18" rx="193.066" ry="18"/>
+<text text-anchor="middle" x="334.72" y="-14.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Core\IO\Writable\ChunkWriterInterface</text>
+</g>
+<!-- \\Slothsoft\\SSE\\EventGenerator&#45;&gt;\\Slothsoft\\Core\\IO\\Writable\\ChunkWriterInterface -->
+<g id="edge4" class="edge"><title>\\Slothsoft\\SSE\\EventGenerator&#45;&gt;\\Slothsoft\\Core\\IO\\Writable\\ChunkWriterInterface</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M806.352,-229.865C790.288,-188.603 744.806,-87.961 669.441,-45 608.205,-10.0935 530.103,-2.19805 464.853,-3.5565"/>
+<polygon fill="none" stroke="black" points="464.393,-0.0681017 454.496,-3.85125 464.592,-7.06527 464.393,-0.0681017"/>
 </g>
 <!-- \\Slothsoft\\SSE\\UnisonServer -->
-<g id="node6" class="node"><title>\\Slothsoft\\SSE\\UnisonServer</title>
+<g id="node5" class="node"><title>\\Slothsoft\\SSE\\UnisonServer</title>
 <polygon fill="none" stroke="black" points="862.941,-554 764.941,-554 764.941,-518 862.941,-518 862.941,-554"/>
 <text text-anchor="middle" x="813.941" y="-533.2" font-family="Courier,monospace" font-size="11.00">UnisonServer</text>
+</g>
+<!-- \\Slothsoft\\SSE\\Server -->
+<g id="node6" class="node"><title>\\Slothsoft\\SSE\\Server</title>
+<polygon fill="none" stroke="black" points="363.22,-527 306.22,-527 306.22,-491 363.22,-491 363.22,-527"/>
+<text text-anchor="middle" x="334.72" y="-506.2" font-family="Courier,monospace" font-size="11.00">Server</text>
 </g>
 <!-- \\Slothsoft\\SSE\\UnisonServer&#45;&gt;\\Slothsoft\\SSE\\Server -->
 <g id="edge5" class="edge"><title>\\Slothsoft\\SSE\\UnisonServer&#45;&gt;\\Slothsoft\\SSE\\Server</title>

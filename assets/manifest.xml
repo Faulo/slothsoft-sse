@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <assets xmlns="http://schema.slothsoft.net/farah/module">
-    <resource-directory name="js" type="application/javascript"/>
-    
-    <fragment name="api">
-	    <fragment name="client">
-	      <import ref="//slothsoft@core/api/DOM" name="DOM"/>
-	      <link-script ref="/js/SSE" name="SSE"/>
-	      <link-script ref="/js/SSE.Client" name="SSE.Client"/>
-	    </fragment>
-    </fragment>
-  </assets>
+	<resource-directory name="js" type="application/javascript" />
+
+	<fragment name="api">
+		<fragment name="client">
+			<import ref="//slothsoft@core/api/DOM" name="DOM" />
+			<link-script ref="/js/SSE" name="SSE" />
+			<link-script ref="/js/SSE.Client" name="SSE.Client" />
+		</fragment>
+	</fragment>
+</assets>

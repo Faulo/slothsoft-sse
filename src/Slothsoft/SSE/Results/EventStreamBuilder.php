@@ -19,15 +19,15 @@ class EventStreamBuilder implements StreamBuilderStrategyInterface
     {
         $this->generator = $generator;
     }
-    
+
     public function buildStreamFileName(ResultInterface $context): string
     {
         return 'events.txt';
     }
 
-    public function buildStreamChangeTime(ResultInterface $context): int
+    public function buildStreamFileStat(ResultInterface $context): array
     {
-        return 0;
+        return [];
     }
 
     public function buildStreamIsBufferable(ResultInterface $context): bool
@@ -58,5 +58,9 @@ class EventStreamBuilder implements StreamBuilderStrategyInterface
         return 'UTF-8';
     }
 
+    public function buildStreamFileStatistics(ResultInterface $context): array
+    {
+        return [];
+    }
 }
 
