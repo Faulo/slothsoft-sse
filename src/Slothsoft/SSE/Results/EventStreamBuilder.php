@@ -2,22 +2,33 @@
 declare(strict_types = 1);
 namespace Slothsoft\SSE\Results;
 
-use Psr\Http\Message\StreamInterface;
 use Slothsoft\Core\Calendar\Seconds;
+use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
+use Slothsoft\Core\IO\Writable\DOMWriterInterface;
+use Slothsoft\Core\IO\Writable\FileWriterInterface;
+use Slothsoft\Core\IO\Writable\StreamWriterInterface;
+use Slothsoft\Core\IO\Writable\StringWriterInterface;
+use Slothsoft\Core\IO\Writable\Adapter\StreamWriterFromChunkWriter;
 use Slothsoft\Farah\Module\Result\ResultInterface;
 use Slothsoft\Farah\Module\Result\StreamBuilderStrategy\StreamBuilderStrategyInterface;
-use Slothsoft\Farah\Streams\GeneratorStream;
-use Slothsoft\Farah\Streams\WaitingStream;
 use Slothsoft\SSE\EventGenerator;
+use Slothsoft\SSE\WaitingGenerator;
+use BadMethodCallException;
+use Generator;
 
-class EventStreamBuilder implements StreamBuilderStrategyInterface
+class EventStreamBuilder implements StreamBuilderStrategyInterface, ChunkWriterInterface
 {
 
     private $generator;
 
     public function __construct(EventGenerator $generator)
     {
-        $this->generator = $generator;
+        $usleep = (int) (100 * Seconds::MILLISECOND * Seconds::USLEEP_FACTOR);
+        $heartbeat = [
+            'interval' => (int) (10 * Seconds::SECOND * Seconds::USLEEP_FACTOR),
+            'content' => ":\n"
+        ];
+        $this->generator = new WaitingGenerator($generator, $usleep, $heartbeat);
     }
 
     public function buildStreamFileName(ResultInterface $context): string
@@ -33,14 +44,6 @@ class EventStreamBuilder implements StreamBuilderStrategyInterface
     public function buildStreamIsBufferable(ResultInterface $context): bool
     {
         return false;
-    }
-
-    public function buildStream(ResultInterface $context): StreamInterface
-    {
-        return new WaitingStream(new GeneratorStream($this->generator), (int) (100 * Seconds::MILLISECOND * Seconds::USLEEP_FACTOR), [
-            'interval' => (int) (10 * Seconds::SECOND * Seconds::USLEEP_FACTOR),
-            'content' => ":\n"
-        ]);
     }
 
     public function buildStreamMimeType(ResultInterface $context): string
@@ -61,6 +64,31 @@ class EventStreamBuilder implements StreamBuilderStrategyInterface
     public function buildStreamFileStatistics(ResultInterface $context): array
     {
         return [];
+    }
+    
+    public function buildStreamWriter(ResultInterface $context): StreamWriterInterface
+    {
+        return new StreamWriterFromChunkWriter($context->lookupChunkWriter());
+    }
+    public function buildFileWriter(ResultInterface $context): FileWriterInterface
+    {
+        throw new BadMethodCallException('EventStream is assumed to be infinite.');
+    }
+    public function buildDOMWriter(ResultInterface $context): DOMWriterInterface
+    {
+        throw new BadMethodCallException('EventStream is assumed to be infinite.');
+    }
+    public function buildStringWriter(ResultInterface $context): StringWriterInterface
+    {
+        throw new BadMethodCallException('EventStream is assumed to be infinite.');
+    }
+    public function buildChunkWriter(ResultInterface $context): ChunkWriterInterface
+    {
+        return $this;
+    }
+    public function toChunks(): Generator
+    {
+        return $this->generator->toChunks();
     }
 }
 

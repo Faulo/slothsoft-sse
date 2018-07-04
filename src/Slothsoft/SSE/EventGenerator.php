@@ -86,5 +86,22 @@ class EventGenerator implements ChunkWriterInterface
             return $ret;
         }
     }
+    public function toFileName(): string
+    {
+        return 'events.txt';
+    }
+
+    public function toString(): string
+    {
+        $data = '';
+        foreach ($this->toChunks() as $chunk) {
+            if ($chunk === '') {
+                break;
+            }
+            $data .= $chunk;
+        }
+        return $data;
+    }
+
 }
 
