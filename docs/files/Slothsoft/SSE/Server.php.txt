@@ -112,7 +112,7 @@ class Server
         $events = $this->dbmsTable->select(true, sprintf('id > %d', $lastId), 'ORDER BY id');
         foreach ($events as $event) {
             $event['id'] = (int) $event['id'];
-            yield $arr;
+            yield $event;
         }
     }
 
