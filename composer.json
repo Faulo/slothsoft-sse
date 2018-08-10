@@ -12,8 +12,8 @@
     "require": {
         "php": "^7.2",
         "psr/http-message": "^1.0",
-        "slothsoft/core": "dev-develop",
-        "slothsoft/farah": "dev-develop"
+        "slothsoft/core": "^1.0",
+        "slothsoft/farah": "^1.0"
     },
     "autoload": {
         "psr-0": {
@@ -38,5 +38,6 @@
     },
     "classmap-authoritative": false,
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "version": "1.0.0"
 }
