@@ -1,0 +1,47 @@
+<?php
+declare(strict_types = 1);
+namespace Slothsoft\SSE;
+
+use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
+use Generator;
+
+class WaitingGenerator implements ChunkWriterInterface
+{
+    private $generator;
+    
+    private $usleep;
+    
+    private $heartbeat;
+    
+    public function __construct(ChunkWriterInterface $generator, int $waitInMicroseconds, array $heartbeat = null)
+    {
+        $this->generator = $generator;
+        $this->usleep = $waitInMicroseconds;
+        $this->heartbeat = $heartbeat;
+    }
+    
+    public function toChunks(): Generator
+    {
+        $timeWaited = 0;
+        foreach ($this->generator->toChunks() as $chunk) {
+            if ($chunk === '') {
+                usleep($this->usleep);
+                
+                if ($this->heartbeat) {
+                    $timeWaited += $this->usleep;
+                    if ($timeWaited > $this->heartbeat['interval']) {
+                        yield $this->heartbeat['content'];
+                        yield '';
+                        $timeWaited = 0;
+                    }
+                }
+            } else {
+                yield $chunk;
+                yield '';
+            }
+        }
+    }
+
+}
+
+
