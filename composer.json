@@ -12,8 +12,8 @@
     "require": {
         "php": "^7.2",
         "psr/http-message": "^1.0",
-        "slothsoft/core": "^1.0",
-        "slothsoft/farah": "^1.0"
+        "slothsoft/core": "dev-develop",
+        "slothsoft/farah": "dev-develop"
     },
     "autoload": {
         "psr-0": {
