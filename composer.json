@@ -1,7 +1,7 @@
 {
     "name": "slothsoft/sse",
     "description": "A Farah module for server-sent events.",
-    "license": "GPL",
+    "license": "WTFPL",
     "authors": [
         {
             "name": "Daniel Schulz",
