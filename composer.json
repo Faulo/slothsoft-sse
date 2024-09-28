@@ -35,6 +35,5 @@
 			"tests/"
 		]
 	},
-	"classmap-authoritative" : false,
 	"homepage" : "http://farah.slothsoft.net/modules/sse"
 }
