@@ -5,8 +5,7 @@
 	<fragment name="api">
 		<fragment name="client">
 			<import ref="//slothsoft@core/api/DOM" />
-			<link-script ref="/js/SSE" />
-			<link-script ref="/js/SSE.Client" />
+			<link-script ref="/js/Client" />
 		</fragment>
 	</fragment>
 </assets>
