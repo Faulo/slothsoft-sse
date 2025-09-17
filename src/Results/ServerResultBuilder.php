@@ -10,13 +10,13 @@ use Slothsoft\SSE\EventGenerator;
 use Slothsoft\SSE\Server;
 
 class ServerResultBuilder implements ResultBuilderStrategyInterface {
-
+    
     private Server $server;
-
+    
     public function __construct(Server $server) {
         $this->server = $server;
     }
-
+    
     public function buildResultStrategies(ExecutableInterface $context, FarahUrlStreamIdentifier $type): ResultStrategies {
         $streamBuilder = new EventStreamBuilder(new EventGenerator($this->server));
         return new ResultStrategies($streamBuilder);

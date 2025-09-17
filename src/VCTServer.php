@@ -14,15 +14,15 @@ namespace Slothsoft\SSE;
 use Slothsoft\Core\Game\Name;
 
 class VCTServer extends Server {
-
+    
     protected string $userId;
-
+    
     protected string $userName;
-
+    
     public function __construct($serverName) {
         parent::__construct(sprintf('vct: %s', $serverName), 'sse');
     }
-
+    
     protected function install(): void {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
@@ -39,17 +39,17 @@ class VCTServer extends Server {
         ];
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
-
+    
     public function init(int $lastId = 0, ?string $userId = null): void {
         parent::init($lastId);
-
+        
         if (! $userId) {
             $userId = sha1($_SERVER['REQUEST_TIME_FLOAT'] . '-' . $_SERVER['REMOTE_ADDR']);
         }
-
+        
         $this->userId = $userId;
     }
-
+    
     public function startRunning(): string {
         parent::startRunning();
         if (! $this->userName) {
@@ -63,12 +63,12 @@ class VCTServer extends Server {
             'lastId' => $this->lastId
         ]);
     }
-
+    
     public function stopRunning(): void {
         parent::stopRunning();
         $this->dispatchEvent('abort', $this->userId);
     }
-
+    
     public function dispatchEvent($type, $data): ?int {
         return $this->dbmsTable->insert([
             'user' => $this->userId,
@@ -77,7 +77,7 @@ class VCTServer extends Server {
             'create-time' => time()
         ]);
     }
-
+    
     public function fetchNewEvents($lastId): iterable {
         $ret = $this->dbmsTable->select(true, 
             // sprintf('id > %d', $lastId),

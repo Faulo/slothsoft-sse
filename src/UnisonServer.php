@@ -14,11 +14,11 @@ namespace Slothsoft\SSE;
 use Slothsoft\Core\Calendar\Seconds;
 
 class UnisonServer extends Server {
-
+    
     public function __construct($serverName) {
         parent::__construct(sprintf('unison: %s', $serverName), 'sse');
     }
-
+    
     protected function install(): void {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
@@ -32,7 +32,7 @@ class UnisonServer extends Server {
         ];
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
-
+    
     public function dispatchEvent($type, $data): ?int {
         return $this->dbmsTable->insert([
             'type' => $type,
@@ -40,7 +40,7 @@ class UnisonServer extends Server {
             'create-time' => microtime(true)
         ]);
     }
-
+    
     public function fetchNewEvents($lastId): iterable {
         if ($ret = parent::fetchNewEvents($lastId)) {
             foreach ($ret as &$arr) {
@@ -49,14 +49,14 @@ class UnisonServer extends Server {
         }
         return $ret;
     }
-
+    
     public function fetchLastEvent(): ?array {
         if ($ret = parent::fetchLastEvent()) {
             $this->_parseEvent($ret);
         }
         return $ret;
     }
-
+    
     public function _parseEvent(array &$event) {
         $status = json_decode($event['data'], true);
         if ($status['playing']) {

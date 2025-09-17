@@ -20,28 +20,28 @@ use Slothsoft\Core\DBMS\Table;
 use Exception;
 
 class Server {
-
+    
     private string $dbName;
-
+    
     private string $tableName;
-
+    
     private ?Table $dbmsTable;
-
+    
     public int $lastId;
-
+    
     public bool $isRunning = false;
-
+    
     public function __construct(string $tableName = 'temp', string $dbName = 'sse') {
         $this->dbName = $dbName;
         $this->tableName = $tableName;
     }
-
+    
     public function __destruct() {
         if ($this->isRunning) {
             $this->stopRunning();
         }
     }
-
+    
     private function install(): void {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
@@ -54,10 +54,10 @@ class Server {
         ];
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
-
+    
     public function init(int $lastId = 0): void {
         $this->lastId = $lastId;
-
+        
         try {
             $this->dbmsTable = Manager::getTable($this->dbName, $this->tableName);
             if (! $this->dbmsTable->tableExists()) {
@@ -72,20 +72,20 @@ class Server {
             throw $e;
         }
     }
-
+    
     public function getStream(): Stream {
         return new Stream($this);
     }
-
+    
     public function startRunning(): string {
         $this->isRunning = true;
         return json_encode('');
     }
-
+    
     public function stopRunning(): void {
         $this->isRunning = false;
     }
-
+    
     public function dispatchEvent($type, $data): ?int {
         if (! $this->dbmsTable) {
             return false;
@@ -95,7 +95,7 @@ class Server {
             'data' => $data
         ]);
     }
-
+    
     public function fetchNewEvents($lastId): iterable {
         if (! $this->dbmsTable) {
             return [];
@@ -106,7 +106,7 @@ class Server {
             yield $event;
         }
     }
-
+    
     public function fetchLastEvent(): ?array {
         if (! $this->dbmsTable) {
             return null;

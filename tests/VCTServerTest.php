@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  * @todo auto-generated
  */
 class VCTServerTest extends TestCase {
-
+    
     public function testClassExists(): void {
         $this->assertTrue(class_exists(VCTServer::class), "Failed to load class 'Slothsoft\SSE\VCTServer'!");
     }

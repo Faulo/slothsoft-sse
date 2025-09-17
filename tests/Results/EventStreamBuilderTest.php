@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  * @todo auto-generated
  */
 class EventStreamBuilderTest extends TestCase {
-
+    
     public function testClassExists(): void {
         $this->assertTrue(class_exists(EventStreamBuilder::class), "Failed to load class 'Slothsoft\SSE\Results\EventStreamBuilder'!");
     }

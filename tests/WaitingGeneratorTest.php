@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  * @todo auto-generated
  */
 class WaitingGeneratorTest extends TestCase {
-
+    
     public function testClassExists(): void {
         $this->assertTrue(class_exists(WaitingGenerator::class), "Failed to load class 'Slothsoft\SSE\WaitingGenerator'!");
     }

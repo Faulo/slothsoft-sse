@@ -15,23 +15,23 @@ use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\Core\IO\HTTPStream;
 
 class Stream extends HTTPStream {
-
+    
     protected const STREAM_EOL = "\n";
-
+    
     protected const STREAM_FIELD_BLANK = ":%s\n";
-
+    
     protected const STREAM_FIELD_ID = "id:%d\n";
-
+    
     protected const STREAM_FIELD_TYPE = "event:%s\n";
-
+    
     protected const STREAM_FIELD_DATA = "data:%s\n";
-
+    
     protected const STREAM_FIELD_RETRY = "retry:%d\n";
-
+    
     protected Server $ownerServer;
-
+    
     protected array $eventStack;
-
+    
     public function __construct(Server $ownerServer) {
         $this->ownerServer = $ownerServer;
         $this->mime = 'text/event-stream';
@@ -43,7 +43,7 @@ class Stream extends HTTPStream {
         $this->heartbeatContent = ":\n";
         $this->heartbeatInterval = 10 * Seconds::SECOND;
     }
-
+    
     protected function parseStatus(): void {
         if ($this->ownerServer->isRunning) {
             if ($eventList = $this->ownerServer->fetchNewEvents($this->ownerServer->lastId)) {
@@ -60,7 +60,7 @@ class Stream extends HTTPStream {
         }
         $this->status = count($this->eventStack) ? self::STATUS_CONTENT : self::STATUS_RETRY;
     }
-
+    
     protected function parseContent(): void {
         $this->content = '';
         foreach ($this->eventStack as $event) {
@@ -68,7 +68,7 @@ class Stream extends HTTPStream {
         }
         $this->eventStack = [];
     }
-
+    
     protected function sendEvent(array $event): void {
         $sendEOL = false;
         if (isset($event['id'])) {
@@ -94,7 +94,7 @@ class Stream extends HTTPStream {
             $this->content .= self::STREAM_EOL;
         }
     }
-
+    
     protected function sendEventLine($pattern, $data = null): void {
         if (is_string($data) and strpos($data, self::STREAM_EOL) !== false) {
             $dataList = explode(self::STREAM_EOL, $data);
