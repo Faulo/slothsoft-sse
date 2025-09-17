@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildpath>
-	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-core"/>
-	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-farah"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 	<buildpathentry kind="src" path="src">
 		<attributes>
@@ -214,11 +212,6 @@
 		</attributes>
 	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/sebastian/version/src">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/slothsoft/blob/scripts">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
