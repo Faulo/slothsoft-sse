@@ -15,8 +15,8 @@
 		"slothsoft/farah" : "^1.18"
 	},
 	"autoload" : {
-		"psr-0" : {
-			"Slothsoft\\SSE\\" : "src/"
+		"psr-4" : {
+			"Slothsoft\\SSE\\" : "src"
 		},
 		"files" : [
 			"src/bootstrap.php"
