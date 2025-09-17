@@ -19,7 +19,7 @@ class EventGenerator implements ChunkWriterInterface {
 
     const STREAM_FIELD_RETRY = "retry:%d\n";
 
-    private $server;
+    private Server $server;
 
     public function __construct(Server $server) {
         $this->server = $server;

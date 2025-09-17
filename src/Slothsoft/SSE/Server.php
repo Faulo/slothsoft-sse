@@ -16,21 +16,22 @@ declare(strict_types = 1);
 namespace Slothsoft\SSE;
 
 use Slothsoft\Core\DBMS\Manager;
+use Slothsoft\Core\DBMS\Table;
 use Exception;
 
 class Server {
 
-    private $dbName;
+    private string $dbName;
 
-    private $tableName;
+    private string $tableName;
 
-    private $dbmsTable;
+    private ?Table $dbmsTable;
 
-    public $lastId;
+    public int $lastId;
 
-    public $isRunning = false;
+    public bool $isRunning = false;
 
-    public function __construct($tableName = 'temp', $dbName = 'sse') {
+    public function __construct(string $tableName = 'temp', string $dbName = 'sse') {
         $this->dbName = $dbName;
         $this->tableName = $tableName;
     }
@@ -41,7 +42,7 @@ class Server {
         }
     }
 
-    private function install() {
+    private function install(): void {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
             'type' => 'varchar(32) NULL',
@@ -54,8 +55,8 @@ class Server {
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
 
-    public function init($lastId = null) {
-        $this->lastId = (int) $lastId;
+    public function init(int $lastId = 0): void {
+        $this->lastId = $lastId;
 
         try {
             $this->dbmsTable = Manager::getTable($this->dbName, $this->tableName);
@@ -72,20 +73,20 @@ class Server {
         }
     }
 
-    public function getStream() {
+    public function getStream(): Stream {
         return new Stream($this);
     }
 
-    public function startRunning() {
+    public function startRunning(): string {
         $this->isRunning = true;
         return json_encode('');
     }
 
-    public function stopRunning() {
+    public function stopRunning(): void {
         $this->isRunning = false;
     }
 
-    public function dispatchEvent($type, $data) {
+    public function dispatchEvent($type, $data): ?int {
         if (! $this->dbmsTable) {
             return false;
         }
@@ -106,7 +107,7 @@ class Server {
         }
     }
 
-    public function fetchLastEvent() {
+    public function fetchLastEvent(): ?array {
         if (! $this->dbmsTable) {
             return null;
         }

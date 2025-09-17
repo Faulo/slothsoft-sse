@@ -11,7 +11,7 @@ use Slothsoft\SSE\Server;
 
 class ServerResultBuilder implements ResultBuilderStrategyInterface {
 
-    private $server;
+    private Server $server;
 
     public function __construct(Server $server) {
         $this->server = $server;

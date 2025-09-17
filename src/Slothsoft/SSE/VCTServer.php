@@ -15,15 +15,15 @@ use Slothsoft\Core\Game\Name;
 
 class VCTServer extends Server {
 
-    protected $userId;
+    protected string $userId;
 
-    protected $userName;
+    protected string $userName;
 
     public function __construct($serverName) {
         parent::__construct(sprintf('vct: %s', $serverName), 'sse');
     }
 
-    protected function install() {
+    protected function install(): void {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
             'user' => 'CHAR(40) CHARACTER SET ascii COLLATE ascii_bin NULL',
@@ -40,16 +40,17 @@ class VCTServer extends Server {
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
 
-    public function init($lastId = null, $userId = null) {
+    public function init(int $lastId = 0, ?string $userId = null): void {
         parent::init($lastId);
 
-        $this->userId = $userId;
-        if (! $this->userId) {
-            $this->userId = sha1($_SERVER['REQUEST_TIME_FLOAT'] . '-' . $_SERVER['REMOTE_ADDR']);
+        if (! $userId) {
+            $userId = sha1($_SERVER['REQUEST_TIME_FLOAT'] . '-' . $_SERVER['REMOTE_ADDR']);
         }
+
+        $this->userId = $userId;
     }
 
-    public function startRunning() {
+    public function startRunning(): string {
         parent::startRunning();
         if (! $this->userName) {
             if ($list = Name::generate()) {
@@ -63,12 +64,12 @@ class VCTServer extends Server {
         ]);
     }
 
-    public function stopRunning() {
+    public function stopRunning(): void {
         parent::stopRunning();
         $this->dispatchEvent('abort', $this->userId);
     }
 
-    public function dispatchEvent($type, $data) {
+    public function dispatchEvent($type, $data): ?int {
         return $this->dbmsTable->insert([
             'user' => $this->userId,
             'type' => $type,
@@ -77,7 +78,7 @@ class VCTServer extends Server {
         ]);
     }
 
-    public function fetchNewEvents($lastId) {
+    public function fetchNewEvents($lastId): iterable {
         $ret = $this->dbmsTable->select(true, 
             // sprintf('id > %d', $lastId),
             sprintf('id > %d AND user != "%s"', $lastId, $this->userId), 'ORDER BY id');

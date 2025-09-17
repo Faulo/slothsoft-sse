@@ -7,13 +7,13 @@ use Generator;
 
 class WaitingGenerator implements ChunkWriterInterface {
 
-    private $generator;
+    private ChunkWriterInterface $generator;
 
-    private $usleep;
+    private int $usleep;
 
-    private $heartbeat;
+    private ?array $heartbeat;
 
-    public function __construct(ChunkWriterInterface $generator, int $waitInMicroseconds, array $heartbeat = null) {
+    public function __construct(ChunkWriterInterface $generator, int $waitInMicroseconds, ?array $heartbeat = null) {
         $this->generator = $generator;
         $this->usleep = $waitInMicroseconds;
         $this->heartbeat = $heartbeat;

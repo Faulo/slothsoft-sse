@@ -18,7 +18,7 @@ use Generator;
 
 class EventStreamBuilder implements StreamBuilderStrategyInterface, ChunkWriterInterface {
 
-    private $generator;
+    private WaitingGenerator $generator;
 
     public function __construct(EventGenerator $generator) {
         $usleep = (int) (100 * Seconds::MILLISECOND * Seconds::USLEEP_FACTOR);

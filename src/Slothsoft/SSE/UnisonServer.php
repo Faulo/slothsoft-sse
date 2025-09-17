@@ -19,7 +19,7 @@ class UnisonServer extends Server {
         parent::__construct(sprintf('unison: %s', $serverName), 'sse');
     }
 
-    protected function install() {
+    protected function install(): void {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
             'type' => 'varchar(32) NULL',
@@ -33,7 +33,7 @@ class UnisonServer extends Server {
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
 
-    public function dispatchEvent($type, $data) {
+    public function dispatchEvent($type, $data): void {
         return $this->dbmsTable->insert([
             'type' => $type,
             'data' => $data,
@@ -41,7 +41,7 @@ class UnisonServer extends Server {
         ]);
     }
 
-    public function fetchNewEvents($lastId) {
+    public function fetchNewEvents($lastId): iterable {
         if ($ret = parent::fetchNewEvents($lastId)) {
             foreach ($ret as &$arr) {
                 $this->_parseEvent($arr);
@@ -50,7 +50,7 @@ class UnisonServer extends Server {
         return $ret;
     }
 
-    public function fetchLastEvent() {
+    public function fetchLastEvent(): ?array {
         if ($ret = parent::fetchLastEvent()) {
             $this->_parseEvent($ret);
         }

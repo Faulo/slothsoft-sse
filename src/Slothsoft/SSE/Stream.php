@@ -16,21 +16,21 @@ use Slothsoft\Core\IO\HTTPStream;
 
 class Stream extends HTTPStream {
 
-    const STREAM_EOL = "\n";
+    protected const STREAM_EOL = "\n";
 
-    const STREAM_FIELD_BLANK = ":%s\n";
+    protected const STREAM_FIELD_BLANK = ":%s\n";
 
-    const STREAM_FIELD_ID = "id:%d\n";
+    protected const STREAM_FIELD_ID = "id:%d\n";
 
-    const STREAM_FIELD_TYPE = "event:%s\n";
+    protected const STREAM_FIELD_TYPE = "event:%s\n";
 
-    const STREAM_FIELD_DATA = "data:%s\n";
+    protected const STREAM_FIELD_DATA = "data:%s\n";
 
-    const STREAM_FIELD_RETRY = "retry:%d\n";
+    protected const STREAM_FIELD_RETRY = "retry:%d\n";
 
-    protected $ownerServer;
+    protected Server $ownerServer;
 
-    protected $eventStack;
+    protected array $eventStack;
 
     public function __construct(Server $ownerServer) {
         $this->ownerServer = $ownerServer;
@@ -44,7 +44,7 @@ class Stream extends HTTPStream {
         $this->heartbeatInterval = 10 * Seconds::SECOND;
     }
 
-    protected function parseStatus() {
+    protected function parseStatus(): void {
         if ($this->ownerServer->isRunning) {
             if ($eventList = $this->ownerServer->fetchNewEvents($this->ownerServer->lastId)) {
                 foreach ($eventList as $event) {
@@ -61,7 +61,7 @@ class Stream extends HTTPStream {
         $this->status = count($this->eventStack) ? self::STATUS_CONTENT : self::STATUS_RETRY;
     }
 
-    protected function parseContent() {
+    protected function parseContent(): void {
         $this->content = '';
         foreach ($this->eventStack as $event) {
             $this->sendEvent($event);
@@ -69,7 +69,7 @@ class Stream extends HTTPStream {
         $this->eventStack = [];
     }
 
-    protected function sendEvent(array $event) {
+    protected function sendEvent(array $event): void {
         $sendEOL = false;
         if (isset($event['id'])) {
             $this->sendEventLine(self::STREAM_FIELD_ID, $event['id']);
@@ -95,7 +95,7 @@ class Stream extends HTTPStream {
         }
     }
 
-    protected function sendEventLine($pattern, $data = null) {
+    protected function sendEventLine($pattern, $data = null): void {
         if (is_string($data) and strpos($data, self::STREAM_EOL) !== false) {
             $dataList = explode(self::STREAM_EOL, $data);
             foreach ($dataList as $data) {
