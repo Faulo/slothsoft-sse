@@ -5,8 +5,7 @@ namespace Slothsoft\SSE;
 use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 use Generator;
 
-class EventGenerator implements ChunkWriterInterface
-{
+class EventGenerator implements ChunkWriterInterface {
 
     const STREAM_EOL = "\n";
 
@@ -22,13 +21,11 @@ class EventGenerator implements ChunkWriterInterface
 
     private $server;
 
-    public function __construct(Server $server)
-    {
+    public function __construct(Server $server) {
         $this->server = $server;
     }
 
-    public function toChunks(): Generator
-    {
+    public function toChunks(): Generator {
         $this->server->startRunning();
         yield $this->formatEvent([
             'type' => 'start',
@@ -44,8 +41,7 @@ class EventGenerator implements ChunkWriterInterface
         }
     }
 
-    private function formatEvent(array $event): string
-    {
+    private function formatEvent(array $event): string {
         $ret = '';
         $sendEOL = false;
         if (isset($event['id'])) {
@@ -73,8 +69,7 @@ class EventGenerator implements ChunkWriterInterface
         return $ret;
     }
 
-    private function formatEventLine(string $pattern, string $data = null): string
-    {
+    private function formatEventLine(string $pattern, string $data = null): string {
         if (strpos($data, self::STREAM_EOL) === false) {
             return sprintf($pattern, $data);
         } else {
@@ -86,13 +81,12 @@ class EventGenerator implements ChunkWriterInterface
             return $ret;
         }
     }
-    public function toFileName(): string
-    {
+
+    public function toFileName(): string {
         return 'events.txt';
     }
 
-    public function toString(): string
-    {
+    public function toString(): string {
         $data = '';
         foreach ($this->toChunks() as $chunk) {
             if ($chunk === '') {
@@ -102,6 +96,5 @@ class EventGenerator implements ChunkWriterInterface
         }
         return $data;
     }
-
 }
 

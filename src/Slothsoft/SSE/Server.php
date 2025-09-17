@@ -18,8 +18,7 @@ namespace Slothsoft\SSE;
 use Slothsoft\Core\DBMS\Manager;
 use Exception;
 
-class Server
-{
+class Server {
 
     private $dbName;
 
@@ -31,21 +30,18 @@ class Server
 
     public $isRunning = false;
 
-    public function __construct($tableName = 'temp', $dbName = 'sse')
-    {
+    public function __construct($tableName = 'temp', $dbName = 'sse') {
         $this->dbName = $dbName;
         $this->tableName = $tableName;
     }
 
-    public function __destruct()
-    {
+    public function __destruct() {
         if ($this->isRunning) {
             $this->stopRunning();
         }
     }
 
-    private function install()
-    {
+    private function install() {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
             'type' => 'varchar(32) NULL',
@@ -58,10 +54,9 @@ class Server
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
 
-    public function init($lastId = null)
-    {
+    public function init($lastId = null) {
         $this->lastId = (int) $lastId;
-        
+
         try {
             $this->dbmsTable = Manager::getTable($this->dbName, $this->tableName);
             if (! $this->dbmsTable->tableExists()) {
@@ -77,24 +72,20 @@ class Server
         }
     }
 
-    public function getStream()
-    {
+    public function getStream() {
         return new Stream($this);
     }
 
-    public function startRunning()
-    {
+    public function startRunning() {
         $this->isRunning = true;
         return json_encode('');
     }
 
-    public function stopRunning()
-    {
+    public function stopRunning() {
         $this->isRunning = false;
     }
 
-    public function dispatchEvent($type, $data)
-    {
+    public function dispatchEvent($type, $data) {
         if (! $this->dbmsTable) {
             return false;
         }
@@ -104,8 +95,7 @@ class Server
         ]);
     }
 
-    public function fetchNewEvents($lastId): iterable
-    {
+    public function fetchNewEvents($lastId): iterable {
         if (! $this->dbmsTable) {
             return [];
         }
@@ -116,8 +106,7 @@ class Server
         }
     }
 
-    public function fetchLastEvent()
-    {
+    public function fetchLastEvent() {
         if (! $this->dbmsTable) {
             return null;
         }

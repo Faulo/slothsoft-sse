@@ -14,8 +14,7 @@ namespace Slothsoft\SSE;
 use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\Core\IO\HTTPStream;
 
-class Stream extends HTTPStream
-{
+class Stream extends HTTPStream {
 
     const STREAM_EOL = "\n";
 
@@ -33,8 +32,7 @@ class Stream extends HTTPStream
 
     protected $eventStack;
 
-    public function __construct(Server $ownerServer)
-    {
+    public function __construct(Server $ownerServer) {
         $this->ownerServer = $ownerServer;
         $this->mime = 'text/event-stream';
         $this->encoding = 'UTF-8';
@@ -46,8 +44,7 @@ class Stream extends HTTPStream
         $this->heartbeatInterval = 10 * Seconds::SECOND;
     }
 
-    protected function parseStatus()
-    {
+    protected function parseStatus() {
         if ($this->ownerServer->isRunning) {
             if ($eventList = $this->ownerServer->fetchNewEvents($this->ownerServer->lastId)) {
                 foreach ($eventList as $event) {
@@ -64,8 +61,7 @@ class Stream extends HTTPStream
         $this->status = count($this->eventStack) ? self::STATUS_CONTENT : self::STATUS_RETRY;
     }
 
-    protected function parseContent()
-    {
+    protected function parseContent() {
         $this->content = '';
         foreach ($this->eventStack as $event) {
             $this->sendEvent($event);
@@ -73,8 +69,7 @@ class Stream extends HTTPStream
         $this->eventStack = [];
     }
 
-    protected function sendEvent(array $event)
-    {
+    protected function sendEvent(array $event) {
         $sendEOL = false;
         if (isset($event['id'])) {
             $this->sendEventLine(self::STREAM_FIELD_ID, $event['id']);
@@ -100,8 +95,7 @@ class Stream extends HTTPStream
         }
     }
 
-    protected function sendEventLine($pattern, $data = null)
-    {
+    protected function sendEventLine($pattern, $data = null) {
         if (is_string($data) and strpos($data, self::STREAM_EOL) !== false) {
             $dataList = explode(self::STREAM_EOL, $data);
             foreach ($dataList as $data) {

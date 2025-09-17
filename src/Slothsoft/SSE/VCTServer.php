@@ -13,20 +13,17 @@ namespace Slothsoft\SSE;
 
 use Slothsoft\Core\Game\Name;
 
-class VCTServer extends Server
-{
+class VCTServer extends Server {
 
     protected $userId;
 
     protected $userName;
 
-    public function __construct($serverName)
-    {
+    public function __construct($serverName) {
         parent::__construct(sprintf('vct: %s', $serverName), 'sse');
     }
 
-    protected function install()
-    {
+    protected function install() {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
             'user' => 'CHAR(40) CHARACTER SET ascii COLLATE ascii_bin NULL',
@@ -43,18 +40,16 @@ class VCTServer extends Server
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
 
-    public function init($lastId = null, $userId = null)
-    {
+    public function init($lastId = null, $userId = null) {
         parent::init($lastId);
-        
+
         $this->userId = $userId;
         if (! $this->userId) {
             $this->userId = sha1($_SERVER['REQUEST_TIME_FLOAT'] . '-' . $_SERVER['REMOTE_ADDR']);
         }
     }
 
-    public function startRunning()
-    {
+    public function startRunning() {
         parent::startRunning();
         if (! $this->userName) {
             if ($list = Name::generate()) {
@@ -68,14 +63,12 @@ class VCTServer extends Server
         ]);
     }
 
-    public function stopRunning()
-    {
+    public function stopRunning() {
         parent::stopRunning();
         $this->dispatchEvent('abort', $this->userId);
     }
 
-    public function dispatchEvent($type, $data)
-    {
+    public function dispatchEvent($type, $data) {
         return $this->dbmsTable->insert([
             'user' => $this->userId,
             'type' => $type,
@@ -84,8 +77,7 @@ class VCTServer extends Server
         ]);
     }
 
-    public function fetchNewEvents($lastId)
-    {
+    public function fetchNewEvents($lastId) {
         $ret = $this->dbmsTable->select(true, 
             // sprintf('id > %d', $lastId),
             sprintf('id > %d AND user != "%s"', $lastId, $this->userId), 'ORDER BY id');
