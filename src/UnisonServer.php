@@ -33,7 +33,7 @@ class UnisonServer extends Server {
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
 
-    public function dispatchEvent($type, $data): void {
+    public function dispatchEvent($type, $data): ?int {
         return $this->dbmsTable->insert([
             'type' => $type,
             'data' => $data,

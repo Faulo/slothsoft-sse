@@ -31,9 +31,9 @@
 		"docs"
 	],
 	"autoload-dev" : {
-		"classmap" : [
-			"tests/"
-		]
+		"psr-4" : {
+			"Slothsoft\\SSE\\" : "tests"
+		}
 	},
 	"homepage" : "http://farah.slothsoft.net/modules/sse"
 }
