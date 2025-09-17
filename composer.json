@@ -19,7 +19,7 @@
 			"Slothsoft\\SSE\\" : "src/"
 		},
 		"files" : [
-			"src/registerModule.php"
+			"src/bootstrap.php"
 		]
 	},
 	"require-dev" : {
