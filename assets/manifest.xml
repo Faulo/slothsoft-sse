@@ -4,7 +4,7 @@
 
 	<fragment name="api">
 		<fragment name="client">
-			<import ref="//slothsoft@core/api/DOM" />
+			<import ref="//slothsoft@farah/api/DOM" />
 			<link-script ref="/js/Client" />
 		</fragment>
 	</fragment>
