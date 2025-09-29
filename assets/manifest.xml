@@ -7,5 +7,11 @@
 			<import ref="//slothsoft@farah/api/DOM" />
 			<link-script ref="/js/Client" />
 		</fragment>
+		<fragment name="webrtc-client">
+			<import ref="/api/client" />
+			<link-script ref="/js/WebRTC" />
+			<link-script ref="/js/WebRTC.Adapter" />
+			<link-script ref="/js/WebRTC.User" />
+		</fragment>
 	</fragment>
 </assets>
