@@ -17,6 +17,10 @@ class ServerResultBuilder implements ResultBuilderStrategyInterface {
         $this->server = $server;
     }
     
+    public function isDifferentFromDefault(FarahUrlStreamIdentifier $type): bool {
+        return false;
+    }
+    
     public function buildResultStrategies(ExecutableInterface $context, FarahUrlStreamIdentifier $type): ResultStrategies {
         $streamBuilder = new EventStreamBuilder(new EventGenerator($this->server));
         return new ResultStrategies($streamBuilder);
