@@ -1,9 +1,9 @@
 <?php
 declare(strict_types = 1);
-namespace Slothsoft\SSE;
+namespace Slothsoft\SSE\API;
 
+use Slothsoft\FarahTesting\Module\AbstractModuleTest;
 use Slothsoft\Farah\FarahUrl\FarahUrlAuthority;
-use Slothsoft\Farah\ModuleTests\AbstractModuleTest;
 
 class AssetsModuleTest extends AbstractModuleTest {
     
