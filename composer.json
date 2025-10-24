@@ -12,7 +12,7 @@
 		"php" : ">=7.4",
 		"psr/http-message" : "^1.0",
 		"slothsoft/core" : "^1.0",
-		"slothsoft/farah" : "^1.22.2"
+		"slothsoft/farah" : "^1.24.0"
 	},
 	"autoload" : {
 		"psr-4" : {

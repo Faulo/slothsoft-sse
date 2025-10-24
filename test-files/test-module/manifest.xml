@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<assets xmlns="http://schema.slothsoft.net/farah/module" version="1.1">
+	<fragment name="sse">
+		<custom-asset name="pull" parameter-filter="Slothsoft\SSE\Assets\PullParameterFilter" executable-builder="Slothsoft\SSE\Assets\PullBuilder" />
+	</fragment>
+</assets>
