@@ -1,5 +1,5 @@
 
-export class Client {
+export default class {
     constructor(baseURI, name, lastId) {
         this.name = name;
         if (!lastId) {

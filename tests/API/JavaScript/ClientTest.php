@@ -23,9 +23,9 @@ final class ClientTest extends FarahServerTestCase {
         
         $actual = $this->client->executeAsyncScript(<<<EOT
 async function test(dbName) {
-    const { Client } = await import("/slothsoft@sse/js/Client");
+    const { default: SuT } = await import("/slothsoft@sse/js/Client");
 
-    const client = new Client("/slothsoft@test-module/sse", dbName);
+    const client = new SuT("/slothsoft@test-module/sse", dbName);
 
     return await new Promise(resolve => {
         client.addEventListener("error", eve => resolve(eve.type));
@@ -46,9 +46,9 @@ EOT, $arguments);
         
         $actual = $this->client->executeAsyncScript(<<<EOT
 async function test(dbName) {
-    const { Client } = await import("/slothsoft@sse/js/Client");
+    const { default: SuT } = await import("/slothsoft@sse/js/Client");
             
-    const client = new Client("/slothsoft@test-module/sse", dbName);
+    const client = new SuT("/slothsoft@test-module/sse", dbName);
             
     return await new Promise(resolve => {
         client.addEventListener("error", eve => resolve(eve.type));
