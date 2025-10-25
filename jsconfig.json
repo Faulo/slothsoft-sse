@@ -3,6 +3,9 @@
     "paths": {
       "/slothsoft@farah/*": [
         "../slothsoft-farah/assets/*"
+      ],
+      "/slothsoft@sse/*": [
+        "./assets/*"
       ]
     }
   }
