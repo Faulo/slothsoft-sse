@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class ServerResultBuilderTest extends TestCase {
+final class ServerResultBuilderTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(ServerResultBuilder::class), "Failed to load class 'Slothsoft\SSE\Results\ServerResultBuilder'!");
