@@ -13,23 +13,18 @@ use Slothsoft\SSE\Results\ServerResultBuilder;
 class PullBuilder implements ExecutableBuilderStrategyInterface {
     
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
+        $tableName = $args->get('name');
+        
+        $sse = $this->createServer($tableName);
+        
+        $lastId = (int) $args->get('lastId');
         try {
-            $tableName = $args->get('name');
-            
-            $sse = $this->createServer($tableName);
-            
-            $lastId = (int) $args->get('lastId');
-            try {
-                $sse->init($lastId);
-            } catch (DatabaseException $e) {}
-            
-            $resultBuilder = new ServerResultBuilder($sse);
-            
-            return new ExecutableStrategies($resultBuilder);
-        } catch (\Throwable $e) {
-            file_put_contents(__FILE__ . '.log', (string) $e);
-            throw $e;
-        }
+            $sse->init($lastId);
+        } catch (DatabaseException $e) {}
+        
+        $resultBuilder = new ServerResultBuilder($sse);
+        
+        return new ExecutableStrategies($resultBuilder);
     }
     
     protected function createServer(string $tableName): Server {
