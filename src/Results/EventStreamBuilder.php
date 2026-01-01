@@ -16,7 +16,7 @@ use Slothsoft\SSE\WaitingGenerator;
 use BadMethodCallException;
 use Generator;
 
-class EventStreamBuilder implements StreamBuilderStrategyInterface, ChunkWriterInterface {
+final class EventStreamBuilder implements StreamBuilderStrategyInterface, ChunkWriterInterface {
     
     private WaitingGenerator $generator;
     
@@ -58,7 +58,7 @@ class EventStreamBuilder implements StreamBuilderStrategyInterface, ChunkWriterI
     }
     
     public function buildStreamWriter(ResultInterface $context): StreamWriterInterface {
-        return new StreamWriterFromChunkWriter($context->lookupChunkWriter());
+        return new StreamWriterFromChunkWriter($this, false);
     }
     
     public function buildFileWriter(ResultInterface $context): FileWriterInterface {

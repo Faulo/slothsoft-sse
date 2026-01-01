@@ -5,7 +5,7 @@ namespace Slothsoft\SSE;
 use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 use Generator;
 
-class WaitingGenerator implements ChunkWriterInterface {
+final class WaitingGenerator implements ChunkWriterInterface {
     
     private ChunkWriterInterface $generator;
     
