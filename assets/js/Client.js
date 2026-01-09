@@ -15,7 +15,7 @@ export default class {
         this.addEventListener(
             "error",
             (eve) => {
-                console.log("ERROR while receiving event \"" + eve.type + "\" from server?!");
+                console.warn("ERROR while receiving event %o from server!", eve);
             }
         );
     }
