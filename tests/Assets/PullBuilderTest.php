@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class PullBuilderTest extends TestCase {
+final class PullBuilderTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(PullBuilder::class), "Failed to load class 'Slothsoft\SSE\Assets\PullBuilder'!");

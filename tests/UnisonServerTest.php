@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class UnisonServerTest extends TestCase {
+final class UnisonServerTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(UnisonServer::class), "Failed to load class 'Slothsoft\SSE\UnisonServer'!");
