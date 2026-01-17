@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-final class PullParameterFilterTest extends TestCase {
+class PullParameterFilterTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(PullParameterFilter::class), "Failed to load class 'Slothsoft\SSE\Assets\PullParameterFilter'!");

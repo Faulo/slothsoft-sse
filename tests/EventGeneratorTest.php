@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-final class EventGeneratorTest extends TestCase {
+class EventGeneratorTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(EventGenerator::class), "Failed to load class 'Slothsoft\SSE\EventGenerator'!");

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-final class StreamTest extends TestCase {
+class StreamTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(Stream::class), "Failed to load class 'Slothsoft\SSE\Stream'!");

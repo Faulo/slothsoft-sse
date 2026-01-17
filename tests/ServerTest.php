@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-final class ServerTest extends TestCase {
+class ServerTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(Server::class), "Failed to load class 'Slothsoft\SSE\Server'!");
