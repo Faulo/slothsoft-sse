@@ -69,7 +69,7 @@ class EventGenerator implements ChunkWriterInterface {
         return $ret;
     }
     
-    private function formatEventLine(string $pattern, string $data = null): string {
+    private function formatEventLine(string $pattern, ?string $data = null): string {
         if (strpos($data, self::STREAM_EOL) === false) {
             return sprintf($pattern, $data);
         } else {
