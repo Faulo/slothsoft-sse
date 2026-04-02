@@ -9,10 +9,10 @@
 	],
 	"type" : "library",
 	"require" : {
-		"php" : ">=7.4",
+		"php" : ">=8.0",
 		"psr/http-message" : "^1.0",
 		"slothsoft/core" : "^1.14.19",
-		"slothsoft/farah" : "^1.27.1"
+		"slothsoft/farah" : "^1.28.0"
 	},
 	"autoload" : {
 		"psr-4" : {
