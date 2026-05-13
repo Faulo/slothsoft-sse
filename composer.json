@@ -1,40 +1,41 @@
 {
-	"name" : "slothsoft/sse",
-	"description" : "A Farah module for server-sent events.",
-	"license" : "MIT",
-	"authors" : [{
-			"name" : "Daniel Schulz",
-			"email" : "info.slothsoft@gmail.com"
-		}
-	],
-	"type" : "library",
-	"require" : {
-		"php" : ">=8.2",
-		"psr/http-message" : "^1.1",
-		"slothsoft/core" : "^1.14.19",
-		"slothsoft/farah" : "^1.28.2"
-	},
-	"autoload" : {
-		"psr-4" : {
-			"Slothsoft\\SSE\\" : "src"
-		},
-		"files" : [
-			"src/bootstrap.php"
-		]
-	},
-	"require-dev" : {
-		"phpunit/phpunit" : "~9.6.34",
-		"slothsoft/farah-testing" : "^1.3.8"
-	},
-	"keywords" : [
-		"slothsoft",
-		"farah-module",
-		"docs"
-	],
-	"autoload-dev" : {
-		"psr-4" : {
-			"Slothsoft\\SSE\\" : "tests"
-		}
-	},
-	"homepage" : "http://farah.slothsoft.net/modules/sse"
+    "name": "slothsoft/sse",
+    "description": "A Farah module for server-sent events.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Schulz",
+            "email": "info.slothsoft@gmail.com"
+        }
+    ],
+    "type": "library",
+    "require": {
+        "php": ">=8.2",
+        "psr/http-message": "^1.1",
+        "slothsoft/core": "^1.14.19",
+        "slothsoft/farah": "^1.28.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Slothsoft\\SSE\\": "src"
+        },
+        "files": [
+            "src/bootstrap.php"
+        ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.6.34",
+        "slothsoft/farah-testing": "^1.3.8"
+    },
+    "keywords": [
+        "slothsoft",
+        "farah-module",
+        "docs"
+    ],
+    "autoload-dev": {
+        "psr-4": {
+            "Slothsoft\\SSE\\": "tests"
+        }
+    },
+    "homepage": "http://farah.slothsoft.net/modules/sse"
 }
