@@ -1,10 +1,11 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\SSE\API\JavaScript;
 
 use PHPUnit\Framework\Constraint\IsEqual;
-use Slothsoft\FarahTesting\FarahServerTestCase;
 use Slothsoft\Farah\FarahUrl\FarahUrlAuthority;
+use Slothsoft\FarahTesting\FarahServerTestCase;
 
 final class ClientTest extends FarahServerTestCase {
     
