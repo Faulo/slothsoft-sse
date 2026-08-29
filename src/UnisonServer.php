@@ -9,6 +9,7 @@ declare(strict_types = 1);
  * public function __construct($serverName)
  * *********************************************************************
  */
+
 namespace Slothsoft\SSE;
 
 use Slothsoft\Core\Calendar\Seconds;

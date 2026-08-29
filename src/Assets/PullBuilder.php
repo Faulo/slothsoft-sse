@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\SSE\Assets;
 
 use Slothsoft\Core\DBMS\DatabaseException;
@@ -7,8 +8,8 @@ use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
-use Slothsoft\SSE\Server;
 use Slothsoft\SSE\Results\ServerResultBuilder;
+use Slothsoft\SSE\Server;
 
 class PullBuilder implements ExecutableBuilderStrategyInterface {
     
@@ -20,7 +21,8 @@ class PullBuilder implements ExecutableBuilderStrategyInterface {
         $lastId = (int) $args->get('lastId');
         try {
             $sse->init($lastId);
-        } catch (DatabaseException $e) {}
+        } catch (DatabaseException $e) {
+        }
         
         $resultBuilder = new ServerResultBuilder($sse);
         

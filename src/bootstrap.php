@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\SSE;
 
 use Slothsoft\Farah\Module\Module;

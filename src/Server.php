@@ -13,11 +13,12 @@ declare(strict_types = 1);
  * public function run()
  * *********************************************************************
  */
+
 namespace Slothsoft\SSE;
 
+use Exception;
 use Slothsoft\Core\DBMS\Manager;
 use Slothsoft\Core\DBMS\Table;
-use Exception;
 
 class Server {
     
@@ -25,7 +26,7 @@ class Server {
     
     private string $tableName;
     
-    private ?Table $dbmsTable;
+    protected ?Table $dbmsTable;
     
     public int $lastId;
     

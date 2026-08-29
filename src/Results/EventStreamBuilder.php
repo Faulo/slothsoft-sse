@@ -1,20 +1,21 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\SSE\Results;
 
+use BadMethodCallException;
+use Generator;
 use Slothsoft\Core\Calendar\Seconds;
+use Slothsoft\Core\IO\Writable\Adapter\StreamWriterFromChunkWriter;
 use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 use Slothsoft\Core\IO\Writable\DOMWriterInterface;
 use Slothsoft\Core\IO\Writable\FileWriterInterface;
 use Slothsoft\Core\IO\Writable\StreamWriterInterface;
 use Slothsoft\Core\IO\Writable\StringWriterInterface;
-use Slothsoft\Core\IO\Writable\Adapter\StreamWriterFromChunkWriter;
 use Slothsoft\Farah\Module\Result\ResultInterface;
 use Slothsoft\Farah\Module\Result\StreamBuilderStrategy\StreamBuilderStrategyInterface;
 use Slothsoft\SSE\EventGenerator;
 use Slothsoft\SSE\WaitingGenerator;
-use BadMethodCallException;
-use Generator;
 
 final class EventStreamBuilder implements StreamBuilderStrategyInterface, ChunkWriterInterface {
     

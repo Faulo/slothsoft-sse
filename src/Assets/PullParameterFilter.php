@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\SSE\Assets;
 
 use Slothsoft\Core\IO\Sanitizer\FileNameSanitizer;

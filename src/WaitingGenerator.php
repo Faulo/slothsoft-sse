@@ -1,9 +1,10 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\SSE;
 
-use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 use Generator;
+use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 
 final class WaitingGenerator implements ChunkWriterInterface {
     

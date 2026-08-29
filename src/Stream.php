@@ -9,6 +9,7 @@ declare(strict_types = 1);
  * initial release
  * *********************************************************************
  */
+
 namespace Slothsoft\SSE;
 
 use Slothsoft\Core\Calendar\Seconds;
@@ -37,7 +38,6 @@ class Stream extends HTTPStream {
         $this->mime = 'text/event-stream';
         $this->encoding = 'UTF-8';
         // $this->headerList['connection'] = 'close';
-        $this->hasStarted = false;
         $this->eventStack = [];
         $this->sleepDuration = 100 * Seconds::MILLISECOND;
         $this->heartbeatContent = ":\n";

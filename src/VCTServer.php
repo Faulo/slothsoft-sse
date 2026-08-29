@@ -9,6 +9,7 @@ declare(strict_types = 1);
  * public function __construct($serverName)
  * *********************************************************************
  */
+
 namespace Slothsoft\SSE;
 
 use Slothsoft\Core\Game\Name;
@@ -79,7 +80,7 @@ class VCTServer extends Server {
     }
     
     public function fetchNewEvents($lastId): iterable {
-        $ret = $this->dbmsTable->select(true, 
+        $ret = $this->dbmsTable->select(true,
             // sprintf('id > %d', $lastId),
             sprintf('id > %d AND user != "%s"', $lastId, $this->userId), 'ORDER BY id');
         foreach ($ret as &$arr) {
