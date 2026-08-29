@@ -64,7 +64,7 @@ class Server {
                 $this->install();
             }
             if (! $this->lastId) {
-                $res = $this->dbmsTable->select('id', '', 'ORDER BY id DESC LIMIT 1');
+                $res = $this->dbmsTable->select('id', '', 'ORDER BY id DESC LIMIT 1') ?? [];
                 $this->lastId = (int) current($res);
             }
         } catch (Exception $e) {
@@ -87,10 +87,7 @@ class Server {
     }
     
     public function dispatchEvent($type, $data): ?int {
-        if (! $this->dbmsTable) {
-            return false;
-        }
-        return $this->dbmsTable->insert([
+        return $this->dbmsTable?->insert([
             'type' => $type,
             'data' => $data
         ]);
@@ -100,7 +97,7 @@ class Server {
         if (! $this->dbmsTable) {
             return [];
         }
-        $events = $this->dbmsTable->select(true, sprintf('id > %d', $lastId), 'ORDER BY id');
+        $events = $this->dbmsTable->select(true, sprintf('id > %d', $lastId), 'ORDER BY id') ?? [];
         foreach ($events as $event) {
             $event['id'] = (int) $event['id'];
             yield $event;
@@ -111,7 +108,7 @@ class Server {
         if (! $this->dbmsTable) {
             return null;
         }
-        $ret = $this->dbmsTable->select(true, null, 'ORDER BY id DESC LIMIT 1');
+        $ret = $this->dbmsTable->select(true, null, 'ORDER BY id DESC LIMIT 1') ?? [];
         foreach ($ret as &$arr) {
             $arr['id'] = (int) $arr['id'];
         }
