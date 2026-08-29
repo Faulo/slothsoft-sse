@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <uri name="http://schema.slothsoft.net/farah/dictionary" uri="vendor/slothsoft/farah/assets/schema/dictionary/1.0.xsd"/>
+  <uri name="http://schema.slothsoft.net/farah/module" uri="vendor/slothsoft/farah/assets/schema/module/1.1.xsd"/>
+  <uri name="http://schema.slothsoft.net/farah/sitemap" uri="vendor/slothsoft/farah/assets/schema/sitemap/1.1.xsd"/>
+  <uri name="http://symfony.com/schema/dic/services" uri="vendor/symfony/dependency-injection/Loader/schema/dic/services/services-1.0.xsd"/>
+  <uri name="http://www.w3.org/XML/1998/namespace" uri="vendor/slothsoft/farah/assets/schema/xml/1.0.xsd"/>
+  <uri name="https://phar.io/xml/manifest/1.0" uri="vendor/phar-io/manifest/manifest.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/dictionary/0.1" uri="vendor/slothsoft/farah/assets/schema/dictionary/0.1.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/dictionary/1.0" uri="vendor/slothsoft/farah/assets/schema/dictionary/1.0.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/module/1.0" uri="vendor/slothsoft/farah/assets/schema/module/1.0.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/module/1.1" uri="vendor/slothsoft/farah/assets/schema/module/1.1.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/sitemap/1.0" uri="vendor/slothsoft/farah/assets/schema/sitemap/1.0.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/sitemap/1.1" uri="vendor/slothsoft/farah/assets/schema/sitemap/1.1.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/xml/1.0" uri="vendor/slothsoft/farah/assets/schema/xml/1.0.xsd"/>
+</catalog>
