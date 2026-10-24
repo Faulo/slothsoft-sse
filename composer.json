@@ -12,8 +12,8 @@
     "require": {
         "php": ">=8.2",
         "psr/http-message": "^1.1",
-        "slothsoft/core": "^1.14.19",
-        "slothsoft/farah": "^1.28.2"
+        "slothsoft/core": "^1.14.26",
+        "slothsoft/farah": "^1.28.4"
     },
     "autoload": {
         "psr-4": {
@@ -24,8 +24,9 @@
         ]
     },
     "require-dev": {
+        "phpstan/phpstan": "^2.3.2",
         "phpunit/phpunit": "~9.6.34",
-        "slothsoft/farah-testing": "^1.3.8"
+        "slothsoft/farah-testing": "^1.3.13"
     },
     "keywords": [
         "slothsoft",
@@ -37,5 +38,10 @@
             "Slothsoft\\SSE\\": "tests"
         }
     },
-    "homepage": "http://farah.slothsoft.net/modules/sse"
+    "homepage": "https://faulo.github.io/slothsoft-sse/",
+    "config": {
+        "platform": {
+            "php": "8.2"
+        }
+    }
 }
