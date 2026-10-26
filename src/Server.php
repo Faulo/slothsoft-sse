@@ -109,7 +109,7 @@ class Server {
         if (! $this->dbmsTable) {
             return null;
         }
-        $ret = $this->dbmsTable->select(true, null, 'ORDER BY id DESC LIMIT 1') ?? [];
+        $ret = $this->dbmsTable->select(true, '', 'ORDER BY id DESC LIMIT 1') ?? [];
         foreach ($ret as &$arr) {
             $arr['id'] = (int) $arr['id'];
         }
