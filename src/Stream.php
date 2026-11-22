@@ -31,6 +31,7 @@ class Stream extends HTTPStream {
     
     protected Server $ownerServer;
     
+    /** @var list<array<array-key, mixed>> */
     protected array $eventStack;
     
     public function __construct(Server $ownerServer) {
@@ -69,6 +70,7 @@ class Stream extends HTTPStream {
         $this->eventStack = [];
     }
     
+    /** @param array<array-key, mixed> $event */
     protected function sendEvent(array $event): void {
         $sendEOL = false;
         if (isset($event['id'])) {
@@ -95,8 +97,8 @@ class Stream extends HTTPStream {
         }
     }
     
-    protected function sendEventLine($pattern, $data = null): void {
-        if (is_string($data) and strpos($data, self::STREAM_EOL) !== false) {
+    protected function sendEventLine(string $pattern, mixed $data = null): void {
+        if (is_string($data) && str_contains($data, self::STREAM_EOL)) {
             $dataList = explode(self::STREAM_EOL, $data);
             foreach ($dataList as $data) {
                 $this->content .= sprintf($pattern, $data);

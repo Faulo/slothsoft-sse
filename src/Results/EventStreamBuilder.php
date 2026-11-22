@@ -34,10 +34,6 @@ final class EventStreamBuilder implements StreamBuilderStrategyInterface, ChunkW
         return 'events.txt';
     }
     
-    public function buildStreamFileStat(ResultInterface $context): array {
-        return [];
-    }
-    
     public function buildStreamIsBufferable(ResultInterface $context): bool {
         return false;
     }

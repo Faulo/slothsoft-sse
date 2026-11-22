@@ -19,6 +19,8 @@ namespace Slothsoft\SSE;
 use Exception;
 use Slothsoft\Core\DBMS\Manager;
 use Slothsoft\Core\DBMS\Table;
+use Stringable;
+use UnexpectedValueException;
 
 class Server {
     
@@ -26,9 +28,9 @@ class Server {
     
     private string $tableName;
     
-    protected ?Table $dbmsTable;
+    protected ?Table $dbmsTable = null;
     
-    public int $lastId;
+    public int $lastId = 0;
     
     public bool $isRunning = false;
     
@@ -43,7 +45,7 @@ class Server {
         }
     }
     
-    private function install(): void {
+    protected function install(Table $table): void {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
             'type' => 'varchar(32) NULL',
@@ -53,21 +55,22 @@ class Server {
             'id',
             'type'
         ];
-        $this->dbmsTable->createTable($sqlCols, $sqlKeys);
+        $table->createTable($sqlCols, $sqlKeys);
     }
     
     public function init(int $lastId = 0): void {
         $this->lastId = $lastId;
         
         try {
-            $this->dbmsTable = Manager::getTable($this->dbName, $this->tableName);
-            if (! $this->dbmsTable->tableExists()) {
-                $this->install();
+            $table = Manager::getTable($this->dbName, $this->tableName);
+            if (! $table->tableExists()) {
+                $this->install($table);
             }
             if (! $this->lastId) {
-                $res = $this->dbmsTable->select('id', '', 'ORDER BY id DESC LIMIT 1') ?? [];
+                $res = $table->select('id', '', 'ORDER BY id DESC LIMIT 1') ?? [];
                 $this->lastId = (int) current($res);
             }
+            $this->dbmsTable = $table;
         } catch (Exception $e) {
             $this->dbmsTable = null;
             throw $e;
@@ -80,39 +83,41 @@ class Server {
     
     public function startRunning(): string {
         $this->isRunning = true;
-        return json_encode('');
+        return '""';
     }
     
     public function stopRunning(): void {
         $this->isRunning = false;
     }
     
-    public function dispatchEvent($type, $data): ?int {
+    public function dispatchEvent(?string $type, string|int|float|bool|Stringable|null $data): ?int {
         return $this->dbmsTable?->insert([
             'type' => $type,
             'data' => $data
         ]);
     }
     
-    public function fetchNewEvents($lastId): iterable {
-        if (! $this->dbmsTable) {
-            return [];
-        }
-        $events = $this->dbmsTable->select(true, sprintf('id > %d', $lastId), 'ORDER BY id') ?? [];
-        foreach ($events as $event) {
-            $event['id'] = (int) $event['id'];
-            yield $event;
-        }
+    /** @return iterable<int, array{id: int, ...}> */
+    public function fetchNewEvents(int $lastId): iterable {
+        yield from $this->selectEventRows(sprintf('id > %d', $lastId), 'ORDER BY id');
     }
     
+    /** @return array{id: int, ...}|null */
     public function fetchLastEvent(): ?array {
-        if (! $this->dbmsTable) {
-            return null;
+        return $this->selectEventRows('', 'ORDER BY id DESC LIMIT 1')[0] ?? null;
+    }
+    
+    /** @return list<array{id: int, ...}> */
+    protected function selectEventRows(string $query, string $suffix): array {
+        $rows = $this->dbmsTable?->select(true, $query, $suffix) ?? [];
+        $events = [];
+        foreach ($rows as $row) {
+            if (! is_array($row) || ! isset($row['id'])) {
+                throw new UnexpectedValueException('The event query returned a row without an ID.');
+            }
+            $row['id'] = (int) $row['id'];
+            $events[] = $row;
         }
-        $ret = $this->dbmsTable->select(true, '', 'ORDER BY id DESC LIMIT 1') ?? [];
-        foreach ($ret as &$arr) {
-            $arr['id'] = (int) $arr['id'];
-        }
-        return count($ret) ? reset($ret) : null;
+        return $events;
     }
 }

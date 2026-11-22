@@ -12,8 +12,10 @@ final class WaitingGenerator implements ChunkWriterInterface {
     
     private int $usleep;
     
+    /** @var array{interval: int, content: string}|array{}|null */
     private ?array $heartbeat;
     
+    /** @param array{interval: int, content: string}|array{}|null $heartbeat */
     public function __construct(ChunkWriterInterface $generator, int $waitInMicroseconds, ?array $heartbeat = null) {
         $this->generator = $generator;
         $this->usleep = $waitInMicroseconds;

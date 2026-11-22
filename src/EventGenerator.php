@@ -5,8 +5,9 @@ namespace Slothsoft\SSE;
 
 use Generator;
 use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
+use Slothsoft\Core\IO\Writable\StringWriterInterface;
 
-class EventGenerator implements ChunkWriterInterface {
+class EventGenerator implements ChunkWriterInterface, StringWriterInterface {
     
     const STREAM_EOL = "\n";
     
@@ -42,6 +43,7 @@ class EventGenerator implements ChunkWriterInterface {
         }
     }
     
+    /** @param array<array-key, mixed> $event */
     private function formatEvent(array $event): string {
         $ret = '';
         $sendEOL = false;
@@ -70,8 +72,8 @@ class EventGenerator implements ChunkWriterInterface {
         return $ret;
     }
     
-    private function formatEventLine(string $pattern, ?string $data = null): string {
-        if (strpos($data, self::STREAM_EOL) === false) {
+    private function formatEventLine(string $pattern, string $data): string {
+        if (! str_contains($data, self::STREAM_EOL)) {
             return sprintf($pattern, $data);
         } else {
             $ret = '';
@@ -81,10 +83,6 @@ class EventGenerator implements ChunkWriterInterface {
             }
             return $ret;
         }
-    }
-    
-    public function toFileName(): string {
-        return 'events.txt';
     }
     
     public function toString(): string {

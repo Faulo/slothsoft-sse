@@ -12,19 +12,22 @@ declare(strict_types = 1);
 
 namespace Slothsoft\SSE;
 
+use JsonException;
+use Slothsoft\Core\DBMS\Table;
 use Slothsoft\Core\Game\Name;
+use Stringable;
 
 class VCTServer extends Server {
     
     protected string $userId;
     
-    protected string $userName;
+    protected string $userName = '';
     
-    public function __construct($serverName) {
-        parent::__construct(sprintf('vct: %s', $serverName), 'sse');
+    public function __construct(string $serverName) {
+        parent::__construct(sprintf('vct: %s', $serverName));
     }
     
-    protected function install(): void {
+    protected function install(Table $table): void {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
             'user' => 'CHAR(40) CHARACTER SET ascii COLLATE ascii_bin NULL',
@@ -38,7 +41,7 @@ class VCTServer extends Server {
             'type',
             'create-time'
         ];
-        $this->dbmsTable->createTable($sqlCols, $sqlKeys);
+        $table->createTable($sqlCols, $sqlKeys);
     }
     
     public function init(int $lastId = 0, ?string $userId = null): void {
@@ -51,18 +54,20 @@ class VCTServer extends Server {
         $this->userId = $userId;
     }
     
+    /** @throws JsonException */
     public function startRunning(): string {
-        parent::startRunning();
         if (! $this->userName) {
             if ($list = Name::generate()) {
                 $this->userName = reset($list);
             }
         }
-        return json_encode([
+        $data = json_encode([
             'userId' => $this->userId,
             'userName' => $this->userName,
             'lastId' => $this->lastId
-        ]);
+        ], JSON_THROW_ON_ERROR);
+        parent::startRunning();
+        return $data;
     }
     
     public function stopRunning(): void {
@@ -70,8 +75,8 @@ class VCTServer extends Server {
         $this->dispatchEvent('abort', $this->userId);
     }
     
-    public function dispatchEvent($type, $data): ?int {
-        return $this->dbmsTable->insert([
+    public function dispatchEvent(?string $type, string|int|float|bool|Stringable|null $data): ?int {
+        return $this->dbmsTable?->insert([
             'user' => $this->userId,
             'type' => $type,
             'data' => $data,
@@ -79,13 +84,12 @@ class VCTServer extends Server {
         ]);
     }
     
-    public function fetchNewEvents($lastId): iterable {
-        $ret = $this->dbmsTable->select(true,
-            // sprintf('id > %d', $lastId),
-            sprintf('id > %d AND user != "%s"', $lastId, $this->userId), 'ORDER BY id');
-        foreach ($ret as &$arr) {
-            $arr['id'] = (int) $arr['id'];
+    /** @return iterable<int, array{id: int, ...}> */
+    public function fetchNewEvents(int $lastId): iterable {
+        if ($this->dbmsTable === null) {
+            return [];
         }
-        return $ret;
+        $userId = $this->dbmsTable->escape($this->userId);
+        return $this->selectEventRows(sprintf('id > %d AND user != "%s"', $lastId, $userId), 'ORDER BY id');
     }
 }

@@ -13,14 +13,16 @@ declare(strict_types = 1);
 namespace Slothsoft\SSE;
 
 use Slothsoft\Core\Calendar\Seconds;
+use Slothsoft\Core\DBMS\Table;
+use Stringable;
 
 class UnisonServer extends Server {
     
-    public function __construct($serverName) {
-        parent::__construct(sprintf('unison: %s', $serverName), 'sse');
+    public function __construct(string $serverName) {
+        parent::__construct(sprintf('unison: %s', $serverName));
     }
     
-    protected function install(): void {
+    protected function install(Table $table): void {
         $sqlCols = [
             'id' => 'int NOT NULL AUTO_INCREMENT',
             'type' => 'varchar(32) NULL',
@@ -31,26 +33,26 @@ class UnisonServer extends Server {
             'id',
             'type'
         ];
-        $this->dbmsTable->createTable($sqlCols, $sqlKeys);
+        $table->createTable($sqlCols, $sqlKeys);
     }
     
-    public function dispatchEvent($type, $data): ?int {
-        return $this->dbmsTable->insert([
+    public function dispatchEvent(?string $type, string|int|float|bool|Stringable|null $data): ?int {
+        return $this->dbmsTable?->insert([
             'type' => $type,
             'data' => $data,
             'create-time' => microtime(true)
         ]);
     }
     
-    public function fetchNewEvents($lastId): iterable {
-        if ($ret = parent::fetchNewEvents($lastId)) {
-            foreach ($ret as &$arr) {
-                $this->_parseEvent($arr);
-            }
+    /** @return iterable<int, array{id: int, ...}> */
+    public function fetchNewEvents(int $lastId): iterable {
+        foreach (parent::fetchNewEvents($lastId) as $key => $event) {
+            $this->_parseEvent($event);
+            yield $key => $event;
         }
-        return $ret;
     }
     
+    /** @return array{id: int, ...}|null */
     public function fetchLastEvent(): ?array {
         if ($ret = parent::fetchLastEvent()) {
             $this->_parseEvent($ret);
@@ -58,12 +60,23 @@ class UnisonServer extends Server {
         return $ret;
     }
     
-    public function _parseEvent(array &$event) {
-        $status = json_decode($event['data'], true);
-        if ($status['playing']) {
-            $status['progress'] += microtime(true) - $event['create-time'] + 100 * Seconds::MILLISECOND;
-            $event['data'] = json_encode($status);
+    /**
+     * @param array<array-key, mixed> $event
+     * @param-out ($event is array{id: int, ...} ? array{id: int, ...} : array<array-key, mixed>) $event
+     */
+    public function _parseEvent(array &$event): void {
+        $data = $event['data'] ?? null;
+        if (! is_string($data)) {
+            return;
         }
-        // my_dump($status);
+        $status = json_decode($data, true);
+        $createTime = $event['create-time'] ?? null;
+        if (is_array($status) && ! empty($status['playing']) && is_numeric($status['progress'] ?? null) && is_numeric($createTime)) {
+            $status['progress'] += microtime(true) - $createTime + 100 * Seconds::MILLISECOND;
+            $updatedData = json_encode($status);
+            if ($updatedData !== false) {
+                $event['data'] = $updatedData;
+            }
+        }
     }
 }
