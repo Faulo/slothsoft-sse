@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.12.1] - 2026-11-22
+
+### Fixed
+
+- Declare `Server::dispatchEvent()` with string parameters for the event type and data so subclasses such as Slothsoft Chat can override it with the same signature. Callers of the base server must pass strings.
+
 ## [1.12.0] - 2026-11-22
 
 ### Changed
@@ -186,7 +192,8 @@
 
 - Publish the initial Farah SSE module with a PHP 7.2 minimum, including database-backed servers, chunked `text/event-stream` output with heartbeat comments, and browser client code.
 
-[Unreleased]: https://github.com/Faulo/slothsoft-sse/compare/1.12.0...HEAD
+[Unreleased]: https://github.com/Faulo/slothsoft-sse/compare/1.12.1...HEAD
+[1.12.1]: https://github.com/Faulo/slothsoft-sse/compare/1.12.0...1.12.1
 [1.12.0]: https://github.com/Faulo/slothsoft-sse/compare/1.11.3...1.12.0
 [1.11.3]: https://github.com/Faulo/slothsoft-sse/compare/1.11.2...1.11.3
 [1.11.2]: https://github.com/Faulo/slothsoft-sse/compare/1.11.1...1.11.2

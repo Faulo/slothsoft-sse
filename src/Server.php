@@ -19,7 +19,6 @@ namespace Slothsoft\SSE;
 use Exception;
 use Slothsoft\Core\DBMS\Manager;
 use Slothsoft\Core\DBMS\Table;
-use Stringable;
 use UnexpectedValueException;
 
 class Server {
@@ -90,7 +89,7 @@ class Server {
         $this->isRunning = false;
     }
     
-    public function dispatchEvent(?string $type, string|int|float|bool|Stringable|null $data): ?int {
+    public function dispatchEvent(string $type, string $data): ?int {
         return $this->dbmsTable?->insert([
             'type' => $type,
             'data' => $data
