@@ -4,6 +4,8 @@ declare(strict_types = 1);
 namespace Slothsoft\SSE;
 
 use PHPUnit\Framework\TestCase;
+use ReflectionMethod;
+use ReflectionParameter;
 
 /**
  * ServerTest
@@ -16,14 +18,10 @@ final class ServerTest extends TestCase {
         $this->assertTrue(class_exists(Server::class), "Failed to load class 'Slothsoft\SSE\Server'!");
     }
     
-    /** @runInSeparateProcess */
-    public function testStringOnlyDispatchOverrideIsCompatible(): void {
-        $server = new class() extends Server {
-            public function dispatchEvent(string $type, string $data): int {
-                return 1;
-            }
-        };
+    public function testDispatchEventHasStringParameters(): void {
+        $dispatch = new ReflectionMethod(Server::class, 'dispatchEvent');
+        $parameterTypes = array_map(static fn(ReflectionParameter $parameter): string => (string) $parameter->getType(), $dispatch->getParameters());
         
-        self::assertSame(1, $server->dispatchEvent('message', 'hello'));
+        self::assertSame(['string', 'string'], $parameterTypes);
     }
 }
